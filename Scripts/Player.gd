@@ -6,7 +6,7 @@ const speed = 500
 
 var score = 0
 var lives = 3
-@export var red_shot : PackedScene = preload("res://Scripts/blue_shot.tscn")
+@export var red_shot : PackedScene = preload("res://Scenes/blue_shot.tscn")
 
 func get_input():
 	var direction = Input.get_vector("Left", "Right", "Up", "Down")
