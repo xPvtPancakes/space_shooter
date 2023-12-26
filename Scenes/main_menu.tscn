@@ -10,11 +10,31 @@ script = ExtResource("1_ypwmm")
 position = Vector2(128, 128)
 texture = ExtResource("1_kl85i")
 
+[node name="Black2" type="Sprite2D" parent="."]
+position = Vector2(128, 128)
+texture = ExtResource("1_kl85i")
+
+[node name="Black3" type="Sprite2D" parent="."]
+position = Vector2(128, 128)
+texture = ExtResource("1_kl85i")
+
+[node name="Black4" type="Sprite2D" parent="."]
+position = Vector2(886, 128)
+texture = ExtResource("1_kl85i")
+
+[node name="Black5" type="Sprite2D" parent="."]
+position = Vector2(630, 128)
+texture = ExtResource("1_kl85i")
+
+[node name="Black6" type="Sprite2D" parent="."]
+position = Vector2(374, 128)
+texture = ExtResource("1_kl85i")
+
 [node name="Button" type="Button" parent="."]
-offset_left = 78.0
-offset_top = 171.0
-offset_right = 171.0
-offset_bottom = 202.0
+offset_left = 461.0
+offset_top = 177.0
+offset_right = 554.0
+offset_bottom = 208.0
 text = "New Game"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
