@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjbekul01iach"]
+
+[ext_resource type="Script" path="res://Scripts/blue_ship.gd" id="1_2dsm0"]
+[ext_resource type="Texture2D" uid="uid://cnep1umono3ew" path="res://Spritesheet/sheet.png" id="1_ftb40"]
+
+[node name="blue_ship" type="CharacterBody2D"]
+script = ExtResource("1_2dsm0")
+
+[node name="Guns" type="Marker2D" parent="."]
+position = Vector2(105, 88)
+
+[node name="Blue_ship_sprite" type="Sprite2D" parent="."]
+position = Vector2(105, 140)
+texture = ExtResource("1_ftb40")
+region_enabled = true
+region_rect = Rect2(112, 792, 112, 74)
+
+[node name="player_diameter" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="player_diameter"]
+polygon = PackedVector2Array(99, 103, 110, 103, 117, 123, 161, 144, 142, 175, 123, 169, 116, 179, 89, 179, 86, 172, 67, 176, 48, 144, 91, 122)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(100, 106, 109, 106, 113, 129, 152, 146, 138, 167, 120, 163, 111, 169, 94, 172, 88, 167, 71, 168, 59, 146, 94, 129)
+
+[connection signal="area_entered" from="player_diameter" to="." method="_on_player_diameter_area_entered"]
+[connection signal="body_entered" from="player_diameter" to="." method="_on_area_2d_body_entered"]

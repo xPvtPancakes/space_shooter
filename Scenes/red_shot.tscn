@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://hwdgr5vynvqb"]
+
+[ext_resource type="Script" path="res://Scripts/red_shot.gd" id="1_cfgt0"]
+[ext_resource type="Texture2D" uid="uid://cnep1umono3ew" path="res://Spritesheet/sheet.png" id="1_rumei"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_275t0"]
+size = Vector2(7, 32)
+
+[node name="RigidBody2D" type="RigidBody2D"]
+script = ExtResource("1_cfgt0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(73, 49)
+shape = SubResource("RectangleShape2D_275t0")
+
+[node name="Sheet" type="Sprite2D" parent="."]
+position = Vector2(73, 49)
+texture = ExtResource("1_rumei")
+region_enabled = true
+region_rect = Rect2(856, 132, 8, 33)

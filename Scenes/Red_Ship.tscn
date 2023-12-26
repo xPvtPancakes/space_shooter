@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4fkysrj0uh8w"]
+
+[ext_resource type="Texture2D" uid="uid://cnep1umono3ew" path="res://Spritesheet/sheet.png" id="1_7ih3y"]
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_q825g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c0lsv"]
+atlas = ExtResource("1_7ih3y")
+region = Rect2(0, 941, 111, 78)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tjq56"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c0lsv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(106, 76)
+script = ExtResource("1_q825g")
+
+[node name="Guns" type="Marker2D" parent="Player"]
+position = Vector2(-1.1, 2)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+position = Vector2(-2.1, 54)
+sprite_frames = SubResource("SpriteFrames_tjq56")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
+position = Vector2(-0.0999985, 54)
+polygon = PackedVector2Array(2, -38, 10, -20, 55, 5, 37, 35, 16, 30, 12, 38, -14, 38, -18, 31, -39, 36, -58, 5, -11, -21, -5, -38)

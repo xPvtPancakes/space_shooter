@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c03ry3wb554tu"]
+
+[ext_resource type="Script" path="res://Scripts/enemy_fire.gd" id="1_4haks"]
+[ext_resource type="Texture2D" uid="uid://cnep1umono3ew" path="res://Spritesheet/sheet.png" id="1_nanl1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p0r43"]
+size = Vector2(8, 35)
+
+[node name="enemy_fire" type="Area2D" groups=["Enemy"]]
+script = ExtResource("1_4haks")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 19.5)
+shape = SubResource("RectangleShape2D_p0r43")
+
+[node name="Sheet" type="Sprite2D" parent="."]
+position = Vector2(0, 20)
+texture = ExtResource("1_nanl1")
+region_enabled = true
+region_rect = Rect2(854, 640, 10, 36)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
