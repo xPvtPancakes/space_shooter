@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://dwfhd5do06amr"]
+[gd_scene load_steps=8 format=3 uid="uid://dwfhd5do06amr"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_v63fr"]
 [ext_resource type="PackedScene" uid="uid://cjbekul01iach" path="res://Scenes/blue_ship.tscn" id="2_g10mx"]
 [ext_resource type="PackedScene" uid="uid://cbg551gcxxdqy" path="res://Scenes/green_enemy.tscn" id="3_jv74c"]
 [ext_resource type="PackedScene" uid="uid://c03ry3wb554tu" path="res://Scenes/enemy_fire.tscn" id="5_od7jk"]
 [ext_resource type="PackedScene" uid="uid://ba8s26j3ep0tj" path="res://Scenes/blue_shot.tscn" id="5_q1dsd"]
+[ext_resource type="Texture2D" uid="uid://cnep1umono3ew" path="res://Spritesheet/sheet.png" id="6_uittp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kea5m"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_v63fr")
@@ -21,12 +24,29 @@ visible = false
 [node name="Node2D" parent="." instance=ExtResource("5_q1dsd")]
 visible = false
 
-[node name="Button" type="Button" parent="."]
-offset_left = 48.0
-offset_top = 219.0
-offset_right = 328.0
-offset_bottom = 286.0
-text = "signal button"
+[node name="Label" type="Label" parent="."]
+offset_right = 152.0
+offset_bottom = 24.0
+text = "Score:"
+label_settings = SubResource("LabelSettings_kea5m")
+
+[node name="Score_label" type="Label" parent="."]
+offset_left = 50.0
+offset_top = 1.0
+offset_right = 136.0
+offset_bottom = 24.0
+
+[node name="Sheet" type="Sprite2D" parent="."]
+position = Vector2(23, 34)
+scale = Vector2(0.400901, 0.364865)
+texture = ExtResource("6_uittp")
+region_enabled = true
+region_rect = Rect2(112, 792, 111, 74)
+
+[node name="Lives_label" type="Label" parent="."]
+offset_left = 49.0
+offset_top = 22.0
+offset_right = 135.0
+offset_bottom = 45.0
 
 [connection signal="health_changed" from="enemy_fire" to="." method="_on_enemy_fire_health_changed"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
