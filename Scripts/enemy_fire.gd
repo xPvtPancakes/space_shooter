@@ -11,6 +11,7 @@ func _physics_process(delta):
 
 func _on_body_entered(body):
 	if body.name == "blue_ship":
-		PlayerVariables.emit_signal("player_damage")
+		PlayerVariables.emit_signal("player_damage", -1)
+		queue_free()
 
 

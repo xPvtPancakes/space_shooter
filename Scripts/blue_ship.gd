@@ -30,8 +30,8 @@ func _physics_process(delta):
 	#if area.is_in_group("Enemy"):
 		#print("areadamage")
 
-func _on_player_damage():
-	health -= 1
+func _on_player_damage(hp_change):
+	health += hp_change
 	PlayerVariables.emit_signal("player_health", health)
 	if health <= 0:
 		queue_free()
