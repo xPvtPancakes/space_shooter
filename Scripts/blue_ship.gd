@@ -33,5 +33,14 @@ func _physics_process(delta):
 func _on_player_damage(hp_change):
 	health += hp_change
 	PlayerVariables.emit_signal("player_health", health)
+	$DamagePolygon.set_deferred("disabled", true)
 	if health <= 0:
 		queue_free()
+	$Iframe_Timer.start()
+
+
+
+
+func _on_timer_timeout():
+	$DamagePolygon.set_deferred("disabled", false)
+	print("enabled")

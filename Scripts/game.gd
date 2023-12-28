@@ -1,7 +1,7 @@
 extends Node2D
 
-var player_health = 3
-var max_health = 3
+var player_health
+
 var score = 0
 signal hp_change
 
@@ -35,4 +35,5 @@ func _on_score_up(adj_score):
 func _on_health_change(current_health):
 	player_health=current_health
 	$Lives_label.text = ": " + str(player_health)
+	
 	
