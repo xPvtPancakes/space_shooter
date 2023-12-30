@@ -1,19 +1,36 @@
-[gd_scene load_steps=3 format=3 uid="uid://cjbekul01iach"]
+[gd_scene load_steps=6 format=3 uid="uid://cjbekul01iach"]
 
 [ext_resource type="Script" path="res://Scripts/blue_ship.gd" id="1_2dsm0"]
 [ext_resource type="Texture2D" uid="uid://cnep1umono3ew" path="res://Spritesheet/sheet.png" id="1_ftb40"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_088ax"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7wj7"]
+atlas = ExtResource("1_ftb40")
+region = Rect2(112, 791, 112, 75)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eubwk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i7wj7")
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i7wj7")
+}],
+"loop": true,
+"name": &"iframes",
+"speed": 5.0
+}]
 
 [node name="blue_ship" type="CharacterBody2D"]
 script = ExtResource("1_2dsm0")
 
 [node name="Guns" type="Marker2D" parent="."]
 position = Vector2(105, 88)
-
-[node name="Blue_ship_sprite" type="Sprite2D" parent="."]
-position = Vector2(105, 140)
-texture = ExtResource("1_ftb40")
-region_enabled = true
-region_rect = Rect2(112, 792, 112, 74)
 
 [node name="player_diameter" type="Area2D" parent="."]
 
@@ -25,6 +42,22 @@ polygon = PackedVector2Array(100, 106, 109, 106, 113, 129, 152, 146, 138, 167, 1
 
 [node name="Iframe_Timer" type="Timer" parent="."]
 wait_time = 3.0
+
+[node name="Blue_ship_sprite" type="Sprite2D" parent="."]
+position = Vector2(105, 140)
+texture = ExtResource("1_ftb40")
+region_enabled = true
+region_rect = Rect2(112, 792, 112, 74)
+
+[node name="Iframe_Animation" type="AnimatedSprite2D" parent="."]
+visible = false
+material = SubResource("CanvasItemMaterial_088ax")
+position = Vector2(105, 140)
+sprite_frames = SubResource("SpriteFrames_eubwk")
+animation = &"iframes"
+frame = 2
+frame_progress = 0.0866883
+speed_scale = 1.5
 
 [connection signal="area_entered" from="player_diameter" to="." method="_on_player_diameter_area_entered"]
 [connection signal="body_entered" from="player_diameter" to="." method="_on_area_2d_body_entered"]

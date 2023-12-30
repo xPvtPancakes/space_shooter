@@ -34,6 +34,11 @@ func _on_player_damage(hp_change):
 	health += hp_change
 	PlayerVariables.emit_signal("player_health", health)
 	$DamagePolygon.set_deferred("disabled", true)
+	$Blue_ship_sprite.set_deferred("visible", false)
+	$Iframe_Animation.play("iframes")
+	$Iframe_Animation.set_deferred("visible", true)
+
+	
 	if health <= 0:
 		queue_free()
 	$Iframe_Timer.start()
@@ -44,3 +49,6 @@ func _on_player_damage(hp_change):
 func _on_timer_timeout():
 	$DamagePolygon.set_deferred("disabled", false)
 	print("enabled")
+	$Blue_ship_sprite.set_deferred("visible", true)
+	$Iframe_Animation.set_deferred("visible", false)
+
