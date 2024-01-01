@@ -1,6 +1,7 @@
 extends Node2D
 
-var player_health
+var player_health = 3
+@export var Enemy_scene: PackedScene
 
 var score = 0
 signal hp_change
@@ -11,8 +12,9 @@ func _ready():
 	#PlayerVariables.connect("player_damage", _on_player_damage)
 	PlayerVariables.connect("score_up", _on_score_up)
 	PlayerVariables.connect("player_health", _on_health_change)
-
 	$Lives_label.text = ": " + str(player_health)
+	New_game()
+
 
 #func _on_player_damage(damage):
 	#player_health-=1
@@ -36,4 +38,26 @@ func _on_health_change(current_health):
 	player_health=current_health
 	$Lives_label.text = ": " + str(player_health)
 	
+func New_game():
+	#$blue_ship.start($Start_position.position)
+	$StartTimer.start()
 	
+func Game_over():
+	$EnemyTimer.stop()
+	
+
+func _on_start_timer_timeout():
+	$EnemyTimer.start()
+	$EnemyTimer.start()
+
+
+func _on_enemy_timer_timeout():
+	var enemy = Enemy_scene.instantiate()
+	print("enemy timer")
+	var enemy_spawn_location = $EnemySpawn/EnemySpawnLocation
+	enemy_spawn_location.progress_ratio = randf()
+	
+	var direction = enemy_spawn_location.rotation + PI / 2
+	enemy.position = enemy_spawn_location.position
+	
+	add_child(enemy)

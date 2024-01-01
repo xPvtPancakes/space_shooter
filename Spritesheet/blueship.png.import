@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://br2j2xdp8eniq"
-path="res://.godot/imported/hearts.png-217095efbc5b27233a56154a853f58bd.ctex"
+uid="uid://dendrdqwm8ght"
+path="res://.godot/imported/blueship.png-eb5ef5818b2a962a6d5f023006e4ed55.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Spritesheet/hearts.png"
-dest_files=["res://.godot/imported/hearts.png-217095efbc5b27233a56154a853f58bd.ctex"]
+source_file="res://Spritesheet/blueship.png"
+dest_files=["res://.godot/imported/blueship.png-eb5ef5818b2a962a6d5f023006e4ed55.ctex"]
 
 [params]
 

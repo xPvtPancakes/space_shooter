@@ -4,10 +4,10 @@ extends CharacterBody2D
 
 
 func shooting():
-	var b = enemy_fire.instantiate()
-	owner.add_child(b)
-	b.transform = $Guns.global_transform
-
+	#var b = enemy_fire.instantiate()
+	#owner.add_child(b)
+	#b.transform = $Guns.global_transform
+	pass
 
 func _on_timer_timeout():
 	shooting()

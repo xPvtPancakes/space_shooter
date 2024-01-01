@@ -4,19 +4,22 @@
 [ext_resource type="Texture2D" uid="uid://cnep1umono3ew" path="res://Spritesheet/sheet.png" id="1_lhefi"]
 
 [node name="green_enemy" type="CharacterBody2D" groups=["enemy"]]
+position = Vector2(-1, -2)
+collision_mask = 0
 script = ExtResource("1_4jimc")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-139.4, -162.8)
 polygon = PackedVector2Array(108, 124, 128, 131, 130, 140, 146, 140, 148, 130, 168, 123, 184, 150, 163, 207, 148, 205, 154, 178, 150, 183, 127, 183, 122, 178, 128, 204, 114, 207, 92, 151)
 
 [node name="Sheet" type="Sprite2D" parent="."]
-position = Vector2(138, 166)
+position = Vector2(-1.4, 3.2)
 texture = ExtResource("1_lhefi")
 region_enabled = true
 region_rect = Rect2(426, 553, 90, 82)
 
 [node name="Guns" type="Marker2D" parent="."]
-position = Vector2(138, 216)
+position = Vector2(-1.4, 53.2)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.25

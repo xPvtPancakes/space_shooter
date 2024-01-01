@@ -1,30 +1,26 @@
-[gd_scene load_steps=8 format=3 uid="uid://dwfhd5do06amr"]
+[gd_scene load_steps=7 format=3 uid="uid://dwfhd5do06amr"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_v63fr"]
 [ext_resource type="PackedScene" uid="uid://cjbekul01iach" path="res://Scenes/blue_ship.tscn" id="2_g10mx"]
 [ext_resource type="PackedScene" uid="uid://cbg551gcxxdqy" path="res://Scenes/green_enemy.tscn" id="3_jv74c"]
-[ext_resource type="PackedScene" uid="uid://c03ry3wb554tu" path="res://Scenes/enemy_fire.tscn" id="5_od7jk"]
-[ext_resource type="PackedScene" uid="uid://ba8s26j3ep0tj" path="res://Scenes/blue_shot.tscn" id="5_q1dsd"]
 [ext_resource type="Texture2D" uid="uid://cnep1umono3ew" path="res://Spritesheet/sheet.png" id="6_uittp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kea5m"]
 
+[sub_resource type="Curve2D" id="Curve2D_lqaam"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -83, 50, 0, 0, 0, 0, 1184, 49, 0, 0, 0, 0, 1206, 393, 0, 0, 0, 0, -92, 396, 0, 0, 0, 0, -83, 50, 0, 0, 0, 0, -96, 222)
+}
+point_count = 6
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_v63fr")
+Enemy_scene = ExtResource("3_jv74c")
 
 [node name="blue_ship" parent="." instance=ExtResource("2_g10mx")]
-position = Vector2(450, 420)
+position = Vector2(105, 351)
 
-[node name="green_enemy" parent="." instance=ExtResource("3_jv74c")]
-position = Vector2(414, 85)
-
-[node name="enemy_fire" parent="." instance=ExtResource("5_od7jk")]
-visible = false
-
-[node name="Node2D" parent="." instance=ExtResource("5_q1dsd")]
-visible = false
-
-[node name="Label" type="Label" parent="."]
+[node name="Score" type="Label" parent="."]
 offset_right = 152.0
 offset_bottom = 24.0
 text = "Score:"
@@ -36,7 +32,7 @@ offset_top = 1.0
 offset_right = 136.0
 offset_bottom = 24.0
 
-[node name="Sheet" type="Sprite2D" parent="."]
+[node name="LivesSprite" type="Sprite2D" parent="."]
 position = Vector2(23, 34)
 scale = Vector2(0.400901, 0.364865)
 texture = ExtResource("6_uittp")
@@ -49,4 +45,21 @@ offset_top = 22.0
 offset_right = 135.0
 offset_bottom = 45.0
 
-[connection signal="health_changed" from="enemy_fire" to="." method="_on_enemy_fire_health_changed"]
+[node name="Start_position" type="Marker2D" parent="."]
+position = Vector2(553, 528)
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="EnemyTimer" type="Timer" parent="."]
+
+[node name="EnemySpawn" type="Path2D" parent="."]
+curve = SubResource("Curve2D_lqaam")
+
+[node name="EnemySpawnLocation" type="PathFollow2D" parent="EnemySpawn"]
+position = Vector2(-83, 50)
+rotation = -0.000789266
+
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
