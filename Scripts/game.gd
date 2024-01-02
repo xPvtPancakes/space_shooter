@@ -51,13 +51,13 @@ func _on_start_timer_timeout():
 	$EnemyTimer.start()
 
 
-func _on_enemy_timer_timeout():
-	var enemy = Enemy_scene.instantiate()
-	print("enemy timer")
-	var enemy_spawn_location = $EnemySpawn/EnemySpawnLocation
-	enemy_spawn_location.progress_ratio = randf()
-	
-	var direction = enemy_spawn_location.rotation + PI / 2
-	enemy.position = enemy_spawn_location.position
-	
-	add_child(enemy)
+#func _on_enemy_timer_timeout():
+	#var enemy = Enemy_scene.instantiate()
+	#print("enemy timer")
+	#var enemy_spawn_location = $EnemySpawn/EnemySpawnLocation
+	#enemy_spawn_location.progress_ratio = randf()
+	#
+	#var direction = enemy_spawn_location.rotation + PI / 2
+	#enemy.position = enemy_spawn_location.position
+	#
+	#add_child(enemy)
