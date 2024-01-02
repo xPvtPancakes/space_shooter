@@ -21,7 +21,7 @@ func shooting():
 	owner.add_child(b)
 	b.transform = $Guns.global_transform
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	get_input()
 	move_and_slide()
 

@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dwfhd5do06amr"]
+[gd_scene load_steps=6 format=3 uid="uid://dwfhd5do06amr"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_v63fr"]
 [ext_resource type="PackedScene" uid="uid://cjbekul01iach" path="res://Scenes/blue_ship.tscn" id="2_g10mx"]
-[ext_resource type="PackedScene" uid="uid://cbg551gcxxdqy" path="res://Scenes/green_enemy.tscn" id="3_jv74c"]
 [ext_resource type="Texture2D" uid="uid://cnep1umono3ew" path="res://Spritesheet/sheet.png" id="6_uittp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kea5m"]
@@ -15,7 +14,6 @@ point_count = 6
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_v63fr")
-Enemy_scene = ExtResource("3_jv74c")
 
 [node name="blue_ship" parent="." instance=ExtResource("2_g10mx")]
 position = Vector2(-266, 89)
@@ -55,8 +53,8 @@ one_shot = true
 [node name="EnemyTimer" type="Timer" parent="."]
 
 [node name="EnemySpawn" type="Path2D" parent="."]
-position = Vector2(122.401, -28.8703)
-scale = Vector2(0.847926, 0.976945)
+position = Vector2(65.4794, -28.8703)
+scale = Vector2(0.254992, 0.976945)
 curve = SubResource("Curve2D_lqaam")
 
 [node name="EnemySpawnLocation" type="PathFollow2D" parent="EnemySpawn"]

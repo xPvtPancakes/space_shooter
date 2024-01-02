@@ -1,8 +1,8 @@
 extends Node2D
 
 var player_health = 3
-@export var Enemy_scene: PackedScene
-
+#@export var Enemy_scene: PackedScene
+var enemy = preload("res://Scenes/green_enemy.tscn")
 var score = 0
 signal hp_change
 
@@ -14,21 +14,10 @@ func _ready():
 	PlayerVariables.connect("player_health", _on_health_change)
 	$Lives_label.text = ": " + str(player_health)
 	New_game()
+	spawn_enemies()
 
 
-#func _on_player_damage(damage):
-	#player_health-=1
-	
-	#print(str(current_health))
-	#if current_health == 3:
-		#print("health 3")
-		#anim.play("3 hp")
-	#if player_health == 2:
-		#print("health 2")
-		##anim.play("2 hp")
-	#if player_health == 1:
-		#print("health 1")
-		##anim.play("1 hp")
+
 
 func _on_score_up(adj_score):
 	score += adj_score
@@ -52,7 +41,7 @@ func _on_start_timer_timeout():
 
 
 #func _on_enemy_timer_timeout():
-	#var enemy = Enemy_scene.instantiate()
+	#var enemy = enemy_scene.instantiate()
 	#print("enemy timer")
 	#var enemy_spawn_location = $EnemySpawn/EnemySpawnLocation
 	#enemy_spawn_location.progress_ratio = randf()
@@ -61,3 +50,12 @@ func _on_start_timer_timeout():
 	#enemy.position = enemy_spawn_location.position
 	#
 	#add_child(enemy)
+	
+func spawn_enemies():
+	var e = enemy.instantiate()
+	#var pos = Vector2(x * (16 + 8) + 24, 16 * 4 + y * 16)
+	var enemy_spawn_location = $EnemySpawn/EnemySpawnLocation
+	
+	add_child(e)
+	e.start(enemy_spawn_location)
+
