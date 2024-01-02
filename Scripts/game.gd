@@ -39,7 +39,7 @@ func _on_health_change(current_health):
 	$Lives_label.text = ": " + str(player_health)
 	
 func New_game():
-	#$blue_ship.start($Start_position.position)
+	$blue_ship.position = $Start_position.position
 	$StartTimer.start()
 	
 func Game_over():
