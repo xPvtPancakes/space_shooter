@@ -20,5 +20,8 @@ region_rect = Rect2(835, 565, 13, 37)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="blue_shot"]
 shape = SubResource("RectangleShape2D_0jbwq")
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="blue_shot"]
+
 [connection signal="body_entered" from="blue_shot" to="blue_shot" method="_on_body_entered"]
 [connection signal="body_shape_entered" from="blue_shot" to="blue_shot" method="_on_body_shape_entered"]
+[connection signal="screen_exited" from="blue_shot/VisibleOnScreenNotifier2D" to="blue_shot" method="_on_visible_on_screen_notifier_2d_screen_exited"]

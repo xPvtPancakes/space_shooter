@@ -8,15 +8,15 @@
 
 [sub_resource type="Curve2D" id="Curve2D_lqaam"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -83, 50, 0, 0, 0, 0, 1184, 49, 0, 0, 0, 0, 1206, 393, 0, 0, 0, 0, -92, 396, 0, 0, 0, 0, -83, 50, 0, 0, 0, 0, -96, 222)
+"points": PackedVector2Array(5.54611, -1.44759, -5.54611, 1.44759, 1184, 49, 0, 0, 0, 0, 1206, 403.091, 0, 0, 0, 0, -280.713, 417.273, 0, 0, 0, 0, -294.228, 51.3819, 0, 0, 0, 0, 1184, 49)
 }
-point_count = 6
+point_count = 5
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_v63fr")
 
 [node name="blue_ship" parent="." instance=ExtResource("2_g10mx")]
-position = Vector2(-266, 89)
+position = Vector2(-242, 450)
 
 [node name="Score" type="Label" parent="."]
 offset_right = 152.0
@@ -51,15 +51,16 @@ wait_time = 0.5
 one_shot = true
 
 [node name="EnemyTimer" type="Timer" parent="."]
+wait_time = 5.0
 
 [node name="EnemySpawn" type="Path2D" parent="."]
-position = Vector2(65.4794, -28.8703)
-scale = Vector2(0.254992, 0.976945)
+position = Vector2(-270.691, -28.2309)
+scale = Vector2(0.221966, 0.705129)
 curve = SubResource("Curve2D_lqaam")
 
 [node name="EnemySpawnLocation" type="PathFollow2D" parent="EnemySpawn"]
-position = Vector2(-83, 50)
-rotation = -0.000789266
+position = Vector2(1184, 49)
+rotation = 2.88628
 
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]

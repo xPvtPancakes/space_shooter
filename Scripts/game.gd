@@ -14,7 +14,7 @@ func _ready():
 	PlayerVariables.connect("player_health", _on_health_change)
 	$Lives_label.text = ": " + str(player_health)
 	New_game()
-	spawn_enemies()
+	#spawn_enemies()
 
 
 
@@ -50,12 +50,17 @@ func _on_start_timer_timeout():
 	#enemy.position = enemy_spawn_location.position
 	#
 	#add_child(enemy)
-	
-func spawn_enemies():
+
+#func spawn_enemies():
+func _on_enemy_timer_timeout():
+	#var e = enemy.instantiate()
 	var e = enemy.instantiate()
 	#var pos = Vector2(x * (16 + 8) + 24, 16 * 4 + y * 16)
 	var enemy_spawn_location = $EnemySpawn/EnemySpawnLocation
-	
+	enemy_spawn_location.progress_ratio = randf()
+	e.position = enemy_spawn_location.position
+
 	add_child(e)
 	e.start(enemy_spawn_location)
+
 
