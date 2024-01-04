@@ -1,40 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://kcqrdy0u0j3o"]
+[gd_scene load_steps=4 format=3 uid="uid://kcqrdy0u0j3o"]
 
-[ext_resource type="Texture2D" uid="uid://cio8vqwss111t" path="res://Backgrounds/black.png" id="1_kl85i"]
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_ypwmm"]
+[ext_resource type="PackedScene" uid="uid://cnavhexsl7ivr" path="res://Scenes/blackbackground.tscn" id="2_tiquf"]
+[ext_resource type="FontFile" uid="uid://dx54b7ql4q8lc" path="res://Kenney Blocks.ttf" id="3_rubg1"]
 
 [node name="Main_Menu" type="Node2D"]
 script = ExtResource("1_ypwmm")
 
-[node name="Black" type="Sprite2D" parent="."]
-position = Vector2(128, 128)
-texture = ExtResource("1_kl85i")
-
-[node name="Black2" type="Sprite2D" parent="."]
-position = Vector2(128, 128)
-texture = ExtResource("1_kl85i")
-
-[node name="Black3" type="Sprite2D" parent="."]
-position = Vector2(128, 128)
-texture = ExtResource("1_kl85i")
-
-[node name="Black4" type="Sprite2D" parent="."]
-position = Vector2(886, 128)
-texture = ExtResource("1_kl85i")
-
-[node name="Black5" type="Sprite2D" parent="."]
-position = Vector2(630, 128)
-texture = ExtResource("1_kl85i")
-
-[node name="Black6" type="Sprite2D" parent="."]
-position = Vector2(374, 128)
-texture = ExtResource("1_kl85i")
+[node name="ParallaxBackground" parent="." instance=ExtResource("2_tiquf")]
 
 [node name="Button" type="Button" parent="."]
-offset_left = 461.0
-offset_top = 177.0
-offset_right = 554.0
-offset_bottom = 208.0
+offset_left = 537.0
+offset_top = 487.0
+offset_right = 630.0
+offset_bottom = 518.0
 text = "New Game"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 402.0
+offset_top = 321.0
+offset_right = 796.0
+offset_bottom = 467.0
+theme_override_fonts/font = ExtResource("3_rubg1")
+theme_override_font_sizes/font_size = 26
+text = "Generic Space Shooter"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

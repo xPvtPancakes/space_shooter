@@ -1,0 +1,160 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhx1ruhw11usu"]
+
+[ext_resource type="Script" path="res://Scripts/purple_background.gd" id="1_gwq5a"]
+[ext_resource type="Texture2D" uid="uid://cg5g2yfiexcag" path="res://Backgrounds/purple.png" id="1_ry4s0"]
+
+[node name="PurpleBackground" type="ParallaxBackground"]
+script = ExtResource("1_gwq5a")
+
+[node name="PurpleBackground" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(0, 750)
+
+[node name="Purple" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(126, 123)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple2" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(382, 123)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple3" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(638, 123)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple4" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(893, 123)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple5" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(1149, 123)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple6" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(126, 379)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple7" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(382, 379)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple8" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(638, 379)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple9" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(893, 379)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple10" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(1149, 379)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple11" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(126, 635)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple12" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(382, 635)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple13" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(638, 635)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple14" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(893, 635)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple15" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(1149, 635)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple16" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(126, 123)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple17" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(382, 123)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple18" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(638, 123)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple19" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(893, 123)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple20" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(1149, 123)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple21" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(126, 379)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple22" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(382, 379)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple23" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(638, 379)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple24" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(893, 379)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple25" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(1149, 379)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple26" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(126, 635)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple27" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(382, 635)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple28" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(638, 635)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple29" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(893, 635)
+texture = ExtResource("1_ry4s0")
+
+[node name="Purple30" type="Sprite2D" parent="PurpleBackground"]
+show_behind_parent = true
+position = Vector2(1149, 635)
+texture = ExtResource("1_ry4s0")

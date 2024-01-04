@@ -1,14 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://dwfhd5do06amr"]
+[gd_scene load_steps=7 format=3 uid="uid://dwfhd5do06amr"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_v63fr"]
 [ext_resource type="PackedScene" uid="uid://cjbekul01iach" path="res://Scenes/blue_ship.tscn" id="2_g10mx"]
+[ext_resource type="PackedScene" uid="uid://dhx1ruhw11usu" path="res://Scenes/purple_background.tscn" id="4_fv2ec"]
 [ext_resource type="Texture2D" uid="uid://cnep1umono3ew" path="res://Spritesheet/sheet.png" id="6_uittp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kea5m"]
 
-[sub_resource type="Curve2D" id="Curve2D_lqaam"]
+[sub_resource type="Curve2D" id="Curve2D_43h6o"]
 _data = {
-"points": PackedVector2Array(5.54611, -1.44759, -5.54611, 1.44759, 1184, 49, 0, 0, 0, 0, 1206, 403.091, 0, 0, 0, 0, -280.713, 417.273, 0, 0, 0, 0, -294.228, 51.3819, 0, 0, 0, 0, 1184, 49)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1151, 0, 0, 0, 0, 0, 1152, 268, 0, 0, 0, 0, -1, 267, 0, 0, 0, 0, 0, 1)
 }
 point_count = 5
 
@@ -53,14 +54,28 @@ one_shot = true
 [node name="EnemyTimer" type="Timer" parent="."]
 wait_time = 5.0
 
+[node name="PurpleBackground" parent="." instance=ExtResource("4_fv2ec")]
+
 [node name="EnemySpawn" type="Path2D" parent="."]
-position = Vector2(-270.691, -28.2309)
-scale = Vector2(0.221966, 0.705129)
-curve = SubResource("Curve2D_lqaam")
+position = Vector2(-323.73, 0)
+scale = Vector2(0.269731, 1)
+curve = SubResource("Curve2D_43h6o")
 
 [node name="EnemySpawnLocation" type="PathFollow2D" parent="EnemySpawn"]
-position = Vector2(1184, 49)
-rotation = 2.88628
+position = Vector2(0, 1)
+rotation = -0.00086881
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
+polygon = PackedVector2Array(1, -12, 1198, -8, 1197, -46, -48, -39, -8, 16, -4, 651, -30, 650)
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D2"]
+position = Vector2(1153, 643)
+rotation = 3.14159
+polygon = PackedVector2Array(1, -12, 89.9302, -11.7028, 1198, -8, 1197, -46, -48, -39, -8, 16, -4, 651, -30, 650)
 
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]

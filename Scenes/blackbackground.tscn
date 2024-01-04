@@ -1,0 +1,82 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnavhexsl7ivr"]
+
+[ext_resource type="Texture2D" uid="uid://cio8vqwss111t" path="res://Backgrounds/black.png" id="1_ecy2w"]
+[ext_resource type="Script" path="res://Scripts/blackbackground.gd" id="1_p753q"]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+script = ExtResource("1_p753q")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(0, 750)
+
+[node name="Black" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(128, 127)
+texture = ExtResource("1_ecy2w")
+
+[node name="Black4" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(886, 127)
+texture = ExtResource("1_ecy2w")
+
+[node name="Black7" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1142, 127)
+texture = ExtResource("1_ecy2w")
+
+[node name="Black5" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(630, 127)
+texture = ExtResource("1_ecy2w")
+
+[node name="Black6" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(374, 127)
+texture = ExtResource("1_ecy2w")
+
+[node name="Black8" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(129, 383)
+texture = ExtResource("1_ecy2w")
+
+[node name="Black9" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(128, 383)
+texture = ExtResource("1_ecy2w")
+
+[node name="Black10" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(128, 383)
+texture = ExtResource("1_ecy2w")
+
+[node name="Black11" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(886, 383)
+texture = ExtResource("1_ecy2w")
+
+[node name="Black12" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1142, 383)
+texture = ExtResource("1_ecy2w")
+
+[node name="Black13" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(630, 383)
+texture = ExtResource("1_ecy2w")
+
+[node name="Black14" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(374, 383)
+texture = ExtResource("1_ecy2w")
+
+[node name="Black15" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(128, 637)
+texture = ExtResource("1_ecy2w")
+
+[node name="Black16" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(128, 637)
+texture = ExtResource("1_ecy2w")
+
+[node name="Black17" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(886, 637)
+texture = ExtResource("1_ecy2w")
+
+[node name="Black18" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(1142, 637)
+texture = ExtResource("1_ecy2w")
+
+[node name="Black19" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(630, 637)
+texture = ExtResource("1_ecy2w")
+
+[node name="Black20" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(374, 637)
+texture = ExtResource("1_ecy2w")
