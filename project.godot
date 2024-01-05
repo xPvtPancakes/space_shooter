@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 PlayerVariables="*res://Scenes/player_variables.tscn"
 
+[display]
+
+window/size/resizable=false
+
 [dotnet]
 
 project/assembly_name="Space Shooter"

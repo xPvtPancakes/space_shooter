@@ -11,6 +11,11 @@ func _ready():
 func get_input():
 	var direction = Input.get_vector("Left", "Right", "Up", "Down")
 	velocity = direction * speed
+	#var pos = $Blue_ship_sprite.position
+	#pos.x = clamp(pos.x, 0, get_viewport_rect().size.x)
+	#pos.y = clamp(pos.y, 0, get_viewport_rect().size.y)
+	#global_position = pos
+	
 	if Input.is_action_just_pressed("Space"):
 		shooting()
 
@@ -48,7 +53,6 @@ func _on_player_damage(hp_change):
 
 func _on_timer_timeout():
 	$DamagePolygon.set_deferred("disabled", false)
-	print("enabled")
 	$Blue_ship_sprite.set_deferred("visible", true)
 	$Iframe_Animation.set_deferred("visible", false)
 

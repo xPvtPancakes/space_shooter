@@ -59,7 +59,6 @@ func _on_enemy_timer_timeout():
 	var enemy_spawn_location = $EnemySpawn/EnemySpawnLocation
 	enemy_spawn_location.progress_ratio = randf()
 	e.position = enemy_spawn_location.position
-
 	add_child(e)
 	e.start(enemy_spawn_location)
 
