@@ -2,7 +2,8 @@ extends CharacterBody2D
 
 const speed = 500
 
-var health = 3
+var health = 1
+
 @export var blue_shot : PackedScene = preload("res://Scenes/blue_shot.tscn")
 
 func _ready():
@@ -42,6 +43,7 @@ func _on_player_damage(hp_change):
 	$Blue_ship_sprite.set_deferred("visible", false)
 	$Iframe_Animation.play("iframes")
 	$Iframe_Animation.set_deferred("visible", true)
+	print("you changed health to 1 in the blue-ship scene")
 
 	
 	if health <= 0:

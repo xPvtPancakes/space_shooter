@@ -5,6 +5,10 @@ var player_health = 3
 var enemy = preload("res://Scenes/green_enemy.tscn")
 var score = 0
 signal hp_change
+<<<<<<< Updated upstream
+=======
+var rng = RandomNumberGenerator.new()
+>>>>>>> Stashed changes
 
 #@onready var anim = get_node ("AnimatedSprite2D")
 
@@ -31,12 +35,14 @@ func New_game():
 	$blue_ship.position = $Start_position.position
 	$StartTimer.start()
 	
-func Game_over():
-	$EnemyTimer.stop()
-	
+
 
 func _on_start_timer_timeout():
+<<<<<<< Updated upstream
 	$EnemyTimer.start()
+=======
+	$EnemyTimer.wait_time = randf_range(1,2)
+>>>>>>> Stashed changes
 	$EnemyTimer.start()
 
 
@@ -62,4 +68,8 @@ func _on_enemy_timer_timeout():
 	add_child(e)
 	e.start(enemy_spawn_location)
 
-
+func Game_over():
+	$EnemyTimer.stop()
+	$Game_over.set_deferred("visible", true)
+	
+	
