@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://h0t2m8l38p4f"]
+
+[ext_resource type="Script" path="res://Scripts/Triple_shot_powerup.gd" id="1_atweq"]
+[ext_resource type="Texture2D" uid="uid://o87eijor646r" path="res://Spritesheet/triple_shot.png" id="2_36yuf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4onxd"]
+radius = 31.0161
+
+[node name="Triple_shot_powerup" type="Node2D"]
+script = ExtResource("1_atweq")
+
+[node name="TS_Area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TS_Area"]
+shape = SubResource("CircleShape2D_4onxd")
+
+[node name="TripleShot" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.278723)
+texture = ExtResource("2_36yuf")
+
+[connection signal="area_entered" from="TS_Area" to="." method="_on_ts_area_area_entered"]
+[connection signal="body_entered" from="TS_Area" to="." method="_on_ts_area_body_entered"]

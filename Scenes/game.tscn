@@ -1,32 +1,18 @@
-<<<<<<< Updated upstream
 [gd_scene load_steps=7 format=3 uid="uid://dwfhd5do06amr"]
-=======
-[gd_scene load_steps=8 format=3 uid="uid://dwfhd5do06amr"]
->>>>>>> Stashed changes
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_v63fr"]
 [ext_resource type="PackedScene" uid="uid://cjbekul01iach" path="res://Scenes/blue_ship.tscn" id="2_g10mx"]
-[ext_resource type="FontFile" uid="uid://dx54b7ql4q8lc" path="res://Kenney Blocks.ttf" id="4_sevnx"]
 [ext_resource type="PackedScene" uid="uid://dhx1ruhw11usu" path="res://Scenes/purple_background.tscn" id="4_sf57f"]
+[ext_resource type="PackedScene" uid="uid://h0t2m8l38p4f" path="res://Scenes/triple_shot_powerup.tscn" id="5_l2vcd"]
 [ext_resource type="Texture2D" uid="uid://cnep1umono3ew" path="res://Spritesheet/sheet.png" id="6_uittp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kea5m"]
-
-<<<<<<< Updated upstream
-[sub_resource type="Curve2D" id="Curve2D_43h6o"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1210.72, 5.77778, 0, 0, 0, 0, 5615.67, 5.77778, 0, 0, 0, 0, 5648.68, 10.6667, 0, 0, 0, 0, 1196.05, 10.2222, 0, 0, 0, 0, 1210.72, 5.77778)
-}
-point_count = 5
-=======
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_v3dpe"]
->>>>>>> Stashed changes
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_v63fr")
 
 [node name="blue_ship" parent="." instance=ExtResource("2_g10mx")]
-position = Vector2(-242, 450)
+position = Vector2(-748, 498)
 
 [node name="Score" type="Label" parent="."]
 offset_right = 152.0
@@ -53,18 +39,6 @@ offset_top = 22.0
 offset_right = 135.0
 offset_bottom = 45.0
 
-[node name="Game_over" type="Label" parent="."]
-visible = false
-top_level = true
-offset_right = 1152.0
-offset_bottom = 648.0
-theme_override_fonts/font = ExtResource("4_sevnx")
-theme_override_font_sizes/font_size = 34
-theme_override_styles/normal = SubResource("StyleBoxLine_v3dpe")
-text = "Game Over"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Start_position" type="Marker2D" parent="."]
 position = Vector2(442, 415)
 
@@ -77,19 +51,14 @@ wait_time = 5.0
 
 [node name="PurpleBackground" parent="." instance=ExtResource("4_sf57f")]
 
-[node name="EnemySpawn" type="Path2D" parent="."]
-position = Vector2(-340.101, -14)
-scale = Vector2(0.272648, 4.5)
-curve = SubResource("Curve2D_43h6o")
-
-[node name="EnemySpawnLocation" type="PathFollow2D" parent="EnemySpawn"]
-position = Vector2(2298.06, 5.77778)
-progress = 1087.34
-
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(-3, 0, 1156, -3, 1156, 652, -2, 651, -2, 20, -47, 696, 1218, 694, 1179, -51, 36, -42)
+
+[node name="Triple_shot_powerup" parent="." instance=ExtResource("5_l2vcd")]
+position = Vector2(567, 261)
 
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]

@@ -2,12 +2,14 @@ extends CharacterBody2D
 
 const speed = 500
 
-var health = 1
+var health = 3
+var TS_flag = false
 
 @export var blue_shot : PackedScene = preload("res://Scenes/blue_shot.tscn")
 
 func _ready():
 	PlayerVariables.connect("player_damage", _on_player_damage)
+	PlayerVariables.connect("triple_shot", _on_TS_signal)
 	
 func get_input():
 	var direction = Input.get_vector("Left", "Right", "Up", "Down")
@@ -23,6 +25,8 @@ func get_input():
 
 
 func shooting():
+	if TS_flag == true:
+		print("flag set correctly")
 	var b = blue_shot.instantiate()
 	owner.add_child(b)
 	b.transform = $Guns.global_transform
@@ -38,12 +42,13 @@ func _physics_process(_delta):
 
 func _on_player_damage(hp_change):
 	health += hp_change
+	TS_flag = false
 	PlayerVariables.emit_signal("player_health", health)
-	$DamagePolygon.set_deferred("disabled", true)
+	$player_diameter/CollisionPolygon2D.set_deferred("disabled", true)
 	$Blue_ship_sprite.set_deferred("visible", false)
 	$Iframe_Animation.play("iframes")
 	$Iframe_Animation.set_deferred("visible", true)
-	print("you changed health to 1 in the blue-ship scene")
+	
 
 	
 	if health <= 0:
@@ -54,7 +59,10 @@ func _on_player_damage(hp_change):
 
 
 func _on_timer_timeout():
-	$DamagePolygon.set_deferred("disabled", false)
+	$player_diameter/CollisionPolygon2D.set_deferred("disabled", false)
 	$Blue_ship_sprite.set_deferred("visible", true)
 	$Iframe_Animation.set_deferred("visible", false)
+
+func _on_TS_signal(TSFlag):
+	TS_flag = TSFlag
 
