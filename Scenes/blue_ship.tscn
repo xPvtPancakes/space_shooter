@@ -26,6 +26,14 @@ script = ExtResource("1_2dsm0")
 [node name="Guns" type="Marker2D" parent="."]
 position = Vector2(105, 88)
 
+[node name="Guns2" type="Marker2D" parent="."]
+position = Vector2(110, 86)
+rotation = 0.349066
+
+[node name="Guns3" type="Marker2D" parent="."]
+position = Vector2(100, 86)
+rotation = -0.349066
+
 [node name="player_diameter" type="Area2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="player_diameter"]

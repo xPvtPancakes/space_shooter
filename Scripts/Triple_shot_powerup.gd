@@ -1,6 +1,6 @@
 extends Node2D
 
-var speed = 00
+var speed = 300
 
 
 func _physics_process(delta):

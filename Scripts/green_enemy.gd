@@ -50,3 +50,8 @@ func _on_shoot_timer_timeout():
 	shooting()
 
 
+
+
+func _on_area_2d_body_entered(body):
+	if body.name == "blue_ship":
+		PlayerVariables.emit_signal("player_damage", -1)

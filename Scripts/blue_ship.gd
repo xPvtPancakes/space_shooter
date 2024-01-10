@@ -6,6 +6,7 @@ var health = 3
 var TS_flag = false
 
 @export var blue_shot : PackedScene = preload("res://Scenes/blue_shot.tscn")
+@export var blue_bullet : PackedScene = preload("res://Scenes/blue_bullet.tscn")
 
 func _ready():
 	PlayerVariables.connect("player_damage", _on_player_damage)
@@ -26,10 +27,21 @@ func get_input():
 
 func shooting():
 	if TS_flag == true:
-		print("flag set correctly")
-	var b = blue_shot.instantiate()
-	owner.add_child(b)
-	b.transform = $Guns.global_transform
+		var b = blue_bullet.instantiate()
+		owner.add_child(b)
+		b.transform = $Guns.global_transform
+		var b2 = blue_bullet.instantiate()
+		owner.add_child(b2)
+		b2.transform = $Guns2.global_transform
+		var b3 = blue_bullet.instantiate()
+		owner.add_child(b3)
+		b3.transform = $Guns3.global_transform
+	
+	else:
+		var b = blue_shot.instantiate()
+		owner.add_child(b)
+		b.transform = $Guns.global_transform
+	
 
 func _physics_process(_delta):
 	get_input()
