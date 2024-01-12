@@ -26,13 +26,14 @@ func _on_score_up(adj_score):
 	$Score_label.text = str(score)
 	
 	kill_counter += 5
+	
 	if kill_counter == 10:
 		var x_rand_num =rng.randf_range(50, 1000)
 		var tri_shot_spawn = Vector2(0, 0)
 		var p = tri_shot.instantiate()
 		tri_shot_spawn.x = x_rand_num
 		p.position = tri_shot_spawn
-		add_child(p)
+		add_child.call_deferred(p)
 		kill_counter=0
 
 

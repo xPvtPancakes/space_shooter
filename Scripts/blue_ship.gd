@@ -26,6 +26,7 @@ func get_input():
 
 
 func shooting():
+	$Shoot_SE.play()
 	if TS_flag == true:
 		var b = blue_bullet.instantiate()
 		owner.add_child(b)

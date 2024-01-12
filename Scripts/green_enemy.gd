@@ -5,7 +5,7 @@ extends CharacterBody2D
 var speed = 0
 @onready var screensize = get_viewport_rect().size
 
-func start(pos):
+func start(_pos):
 	speed = 200
 	#position = Vector2(pos.x, -pos.y)
 	#start_position = pos
@@ -40,6 +40,7 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 
 
 func shooting():
+	$Shoot_SE.play()
 	var b = enemy_fire.instantiate()
 	get_tree().root.add_child(b)
 	b.transform = $Guns.global_transform
