@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5xhoolbxncqo"]
+[gd_scene load_steps=5 format=3 uid="uid://b5xhoolbxncqo"]
 
 [ext_resource type="Script" path="res://Scripts/blue_bullet.gd" id="1_6ex2u"]
 [ext_resource type="Texture2D" uid="uid://dt6gwhv31wkjf" path="res://Spritesheet/blue_bullet.png" id="1_34yor"]
+[ext_resource type="AudioStream" uid="uid://xe8oiweqgywc" path="res://Music and sounds/explosion.mp3" id="3_r28yn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uo7al"]
 radius = 10.198
@@ -19,5 +20,9 @@ texture = ExtResource("1_34yor")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
+[node name="Explosion_SE" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_r28yn")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="finished" from="Explosion_SE" to="." method="_on_explosion_se_finished"]

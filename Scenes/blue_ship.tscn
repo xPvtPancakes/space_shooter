@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjbekul01iach"]
+[gd_scene load_steps=8 format=3 uid="uid://cjbekul01iach"]
 
 [ext_resource type="Script" path="res://Scripts/blue_ship.gd" id="1_2dsm0"]
 [ext_resource type="Texture2D" uid="uid://cnep1umono3ew" path="res://Spritesheet/sheet.png" id="1_ftb40"]
 [ext_resource type="Texture2D" uid="uid://dendrdqwm8ght" path="res://Spritesheet/blueship.png" id="3_ghqk7"]
 [ext_resource type="AudioStream" uid="uid://clg8o8mio2s5p" path="res://Music and sounds/laser-14792.mp3" id="4_8fhpp"]
+[ext_resource type="AudioStream" uid="uid://xe8oiweqgywc" path="res://Music and sounds/explosion.mp3" id="5_kktmq"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_088ax"]
 
@@ -63,6 +64,13 @@ frame_progress = 0.0866883
 [node name="Shoot_SE" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_8fhpp")
 
+[node name="Explosion_SE" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_kktmq")
+
+[node name="Explosion_SE2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_kktmq")
+
 [connection signal="area_entered" from="player_diameter" to="." method="_on_player_diameter_area_entered"]
 [connection signal="body_entered" from="player_diameter" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Iframe_Timer" to="." method="_on_timer_timeout"]
+[connection signal="finished" from="Explosion_SE" to="." method="_on_explosion_se_finished"]

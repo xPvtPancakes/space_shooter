@@ -4,6 +4,7 @@ const speed = 500
 
 var health = 3
 var TS_flag = false
+var can_shoot = true
 
 @export var blue_shot : PackedScene = preload("res://Scenes/blue_shot.tscn")
 @export var blue_bullet : PackedScene = preload("res://Scenes/blue_bullet.tscn")
@@ -21,7 +22,8 @@ func get_input():
 	#global_position = pos
 	
 	if Input.is_action_just_pressed("Space"):
-		shooting()
+		if can_shoot == true:
+			shooting()
 
 
 
@@ -56,17 +58,24 @@ func _physics_process(_delta):
 func _on_player_damage(hp_change):
 	health += hp_change
 	TS_flag = false
+	
 	PlayerVariables.emit_signal("player_health", health)
-	$player_diameter/CollisionPolygon2D.set_deferred("disabled", true)
-	$Blue_ship_sprite.set_deferred("visible", false)
-	$Iframe_Animation.play("iframes")
-	$Iframe_Animation.set_deferred("visible", true)
+	
 	
 
 	
 	if health <= 0:
-		queue_free()
-	$Iframe_Timer.start()
+		$Explosion_SE.play()
+		$Blue_ship_sprite.set_deferred("visible", false)
+		$Iframe_Animation.set_deferred("visible", false)
+		can_shoot = false
+	else:
+		$Explosion_SE2.play()
+		$player_diameter/CollisionPolygon2D.set_deferred("disabled", true)
+		$Blue_ship_sprite.set_deferred("visible", false)
+		$Iframe_Animation.play("iframes")
+		$Iframe_Animation.set_deferred("visible", true)
+		$Iframe_Timer.start()
 
 
 
@@ -79,3 +88,7 @@ func _on_timer_timeout():
 func _on_TS_signal(TSFlag):
 	TS_flag = TSFlag
 
+
+
+func _on_explosion_se_finished():
+	queue_free()

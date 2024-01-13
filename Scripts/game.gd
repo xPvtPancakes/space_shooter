@@ -25,7 +25,7 @@ func _on_score_up(adj_score):
 	score += adj_score
 	$Score_label.text = str(score)
 	
-	kill_counter += 5
+	kill_counter += 1
 	
 	if kill_counter == 10:
 		var x_rand_num =rng.randf_range(50, 1000)
@@ -57,7 +57,7 @@ func Game_over():
 	
 
 func _on_start_timer_timeout():
-	$EnemyTimer.wait_time = randf_range(2,6)
+	$EnemyTimer.wait_time = randf_range(0.3,1.2)
 	$EnemyTimer.start()
 	
 
