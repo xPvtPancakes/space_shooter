@@ -10,7 +10,7 @@ size = Vector2(13, 37)
 [node name="Node2D" type="Node2D"]
 position = Vector2(-1, -20)
 
-[node name="blue_shot" type="Area2D" parent="."]
+[node name="blue_shot" type="Area2D" parent="." groups=["player"]]
 script = ExtResource("1_vajcf")
 
 [node name="Explosion_SE" type="AudioStreamPlayer2D" parent="blue_shot"]

@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjl31oglpnjid"]
+
+[ext_resource type="Script" path="res://Scripts/1stBoss.gd" id="1_asrv1"]
+[ext_resource type="PackedScene" uid="uid://c03ry3wb554tu" path="res://Scenes/enemy_fire.tscn" id="2_ht64b"]
+[ext_resource type="Texture2D" uid="uid://cqftys2oqwm1r" path="res://Spritesheet/Toilet.png" id="3_dkbsv"]
+
+[sub_resource type="GDScript" id="GDScript_xjbkn"]
+script/source = "extends Area2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[node name="1stBoss" type="CharacterBody2D" groups=["boss"]]
+script = ExtResource("1_asrv1")
+enemy_fire = ExtResource("2_ht64b")
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-205, -285, -122, -318, -16, -326, 21, -313, 31, -263, 12, -106, 20, -99, 47, -105, 78, -100, 151, -76, 171, -62, 190, -33, 198, -4, 161, 62, 139, 94, 114, 110, 119, 176, 103, 198, 75, 207, 51, 207, 28, 202, 10, 192, -15, 169, -39, 151, -94, 118, -96, 42, -172, -58, -196, -149, -206, -230)
+
+[node name="Area2D" type="Area2D" parent="."]
+script = SubResource("GDScript_xjbkn")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-205, -285, -122, -318, -16, -326, 21, -313, 31, -263, 12, -106, 20, -99, 47, -105, 78, -100, 151, -76, 171, -62, 190, -33, 198, -4, 161, 62, 139, 94, 114, 110, 119, 176, 103, 198, 75, 207, 51, 207, 28, 202, 10, 192, -15, 169, -39, 151, -94, 118, -96, 42, -172, -58, -196, -149, -206, -230)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_dkbsv")
+
+[node name="Gun1" type="Marker2D" parent="."]
+position = Vector2(0, 168)
+
+[node name="Shoot_Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="Shoot_Timer" to="." method="_on_shoot_timer_timeout"]

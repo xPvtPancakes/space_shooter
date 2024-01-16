@@ -15,6 +15,10 @@ func _on_body_entered(body):
 		PlayerVariables.emit_signal("score_up", 20)
 		$Sheet.set_deferred("visible", false)
 		$CollisionShape2D.set_deferred("disabled", true)
+	if body.is_in_group("boss"):
+		body.queue_free()
+		$Explosion_SE.play()
+
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()

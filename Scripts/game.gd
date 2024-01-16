@@ -8,6 +8,8 @@ var score = 0
 signal hp_change
 var rng = RandomNumberGenerator.new()
 var kill_counter = 0
+var rand_range_x = 0.2
+var rand_range_y = 5
 #@onready var anim = get_node ("AnimatedSprite2D")
 
 func _ready():
@@ -27,7 +29,7 @@ func _on_score_up(adj_score):
 	
 	kill_counter += 1
 	
-	if kill_counter == 10:
+	if kill_counter == 1:
 		var x_rand_num =rng.randf_range(50, 1000)
 		var tri_shot_spawn = Vector2(0, 0)
 		var p = tri_shot.instantiate()
@@ -35,7 +37,12 @@ func _on_score_up(adj_score):
 		p.position = tri_shot_spawn
 		add_child.call_deferred(p)
 		kill_counter=0
-
+		rand_range_y -= 0.1
+		if rand_range_y < 0.2:
+			rand_range_y = 0.2
+		$EnemyTimer.wait_time = randf_range(rand_range_x,rand_range_y)
+		print(rand_range_x)
+		print(rand_range_y)
 
 
 func _on_health_change(current_health):
@@ -57,9 +64,9 @@ func Game_over():
 	
 
 func _on_start_timer_timeout():
-	$EnemyTimer.wait_time = randf_range(0.3,1.2)
-	$EnemyTimer.start()
-	
+	$EnemyTimer.wait_time = randf_range(rand_range_x,rand_range_y)
+	#$EnemyTimer.start()
+	print("turned off enemy timer in _on_start_timer_timeout")
 
 
 
@@ -74,13 +81,11 @@ func _on_enemy_timer_timeout():
 		enemy_spawn_location.x = 0
 
 		enemy_spawn_location.y = y_rand_num
-		print(enemy_spawn_location)
-		print("zone 1")
+
 	else:
 		enemy_spawn_location.x = get_viewport_rect().size.x
-
 		enemy_spawn_location.y = y_rand_num
-		print("zone 2")
+
 
 	e.position = enemy_spawn_location
 	add_child(e)
