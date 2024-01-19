@@ -37,9 +37,21 @@ texture = ExtResource("3_dkbsv")
 [node name="Gun1" type="Marker2D" parent="."]
 position = Vector2(0, 168)
 
+[node name="Gun2" type="Marker2D" parent="."]
+position = Vector2(-93, 50)
+rotation = -0.174533
+
+[node name="Gun3" type="Marker2D" parent="."]
+position = Vector2(-93, 50)
+rotation = 0.174533
+
 [node name="Shoot_Timer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
+
+[node name="Invul_timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="timeout" from="Shoot_Timer" to="." method="_on_shoot_timer_timeout"]

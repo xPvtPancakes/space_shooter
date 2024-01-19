@@ -29,7 +29,7 @@ func _on_score_up(adj_score):
 	
 	kill_counter += 1
 	
-	if kill_counter == 1:
+	if kill_counter == 10:
 		var x_rand_num =rng.randf_range(50, 1000)
 		var tri_shot_spawn = Vector2(0, 0)
 		var p = tri_shot.instantiate()
@@ -66,7 +66,8 @@ func Game_over():
 func _on_start_timer_timeout():
 	$EnemyTimer.wait_time = randf_range(rand_range_x,rand_range_y)
 	#$EnemyTimer.start()
-	print("turned off enemy timer in _on_start_timer_timeout")
+	print("disabled enemy timer in main game")
+	
 
 
 
