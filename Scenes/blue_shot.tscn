@@ -1,13 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://ba8s26j3ep0tj"]
+[gd_scene load_steps=9 format=3 uid="uid://ba8s26j3ep0tj"]
 
 [ext_resource type="Script" path="res://Scenes/Area2D.gd" id="1_vajcf"]
 [ext_resource type="Texture2D" uid="uid://cnep1umono3ew" path="res://Spritesheet/sheet.png" id="2_fp7nl"]
 [ext_resource type="AudioStream" uid="uid://xe8oiweqgywc" path="res://Music and sounds/explosion.mp3" id="2_jqies"]
 [ext_resource type="Texture2D" uid="uid://d5gh54u6vmhl" path="res://Spritesheet/Explosion/explosion00.png" id="4_rlrln"]
 [ext_resource type="Texture2D" uid="uid://cjcf2t0ik0oan" path="res://Spritesheet/Explosion/explosion01.png" id="5_caay3"]
-[ext_resource type="Texture2D" uid="uid://88803ppkgn3o" path="res://Spritesheet/Explosion/explosion02.png" id="6_626rx"]
-[ext_resource type="Texture2D" uid="uid://dsyn1o6j85u5i" path="res://Spritesheet/Explosion/explosion03.png" id="7_6jjsr"]
-[ext_resource type="Texture2D" uid="uid://dmdxbgmqyyulg" path="res://Spritesheet/Explosion/explosion04.png" id="8_78skv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0jbwq"]
 size = Vector2(13, 37)
@@ -24,19 +21,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("5_caay3")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_626rx")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_6jjsr")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_78skv")
 }],
 "loop": false,
 "name": &"default",
-"speed": 7.0
+"speed": 12.0
 }]
 
 [node name="Node2D" type="Node2D"]
@@ -58,16 +46,33 @@ shape = SubResource("RectangleShape2D_0jbwq")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="blue_shot"]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="blue_shot"]
+[node name="Explosion_Sprite" type="AnimatedSprite2D" parent="blue_shot"]
 visible = false
-position = Vector2(-1.90735e-06, 2)
+position = Vector2(1, -31)
 scale = Vector2(0.0471698, 0.0522388)
 sprite_frames = SubResource("SpriteFrames_yy82r")
-frame = 3
-frame_progress = 0.577154
+frame = 1
+frame_progress = 1.0
+
+[node name="Boss_Explosion_Sprite" type="AnimatedSprite2D" parent="blue_shot"]
+visible = false
+position = Vector2(-8, -10)
+scale = Vector2(0.0185849, 0.0196469)
+sprite_frames = SubResource("SpriteFrames_yy82r")
+frame = 1
+frame_progress = 1.0
+
+[node name="Boss_Explosion_Sprite2" type="AnimatedSprite2D" parent="blue_shot"]
+visible = false
+position = Vector2(8, -10)
+scale = Vector2(0.0185849, 0.0196469)
+sprite_frames = SubResource("SpriteFrames_yy82r")
+frame = 1
+frame_progress = 1.0
 
 [connection signal="body_entered" from="blue_shot" to="blue_shot" method="_on_body_entered"]
 [connection signal="body_shape_entered" from="blue_shot" to="blue_shot" method="_on_body_shape_entered"]
 [connection signal="finished" from="blue_shot/Explosion_SE" to="blue_shot" method="_on_explosion_se_finished"]
 [connection signal="screen_exited" from="blue_shot/VisibleOnScreenNotifier2D" to="blue_shot" method="_on_visible_on_screen_notifier_2d_screen_exited"]
-[connection signal="animation_finished" from="blue_shot/AnimatedSprite2D" to="blue_shot" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="blue_shot/Explosion_Sprite" to="blue_shot" method="_on_explosion_sprite_animation_finished"]
+[connection signal="animation_finished" from="blue_shot/Boss_Explosion_Sprite" to="blue_shot" method="_on_boss_explosion_sprite_animation_finished"]
