@@ -6,9 +6,14 @@
 [ext_resource type="FontFile" uid="uid://dx54b7ql4q8lc" path="res://Kenney Blocks.ttf" id="6_00de0"]
 [ext_resource type="AudioStream" uid="uid://bddvxysad18ad" path="res://Music and sounds/Main Theme - Star Fox 64 [64] - Super Smash Bros. Ultimate.mp3" id="6_ohcbt"]
 [ext_resource type="Texture2D" uid="uid://cnep1umono3ew" path="res://Spritesheet/sheet.png" id="6_uittp"]
-[ext_resource type="PackedScene" uid="uid://bjl31oglpnjid" path="res://Scenes/1stBoss.tscn" id="7_c4ih1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kea5m"]
+
+[sub_resource type="Curve2D" id="Curve2D_dfm3a"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 509, -19, 0, 0, 0, 0, 1158, -19, 0, 0, 0, 0, -17, -12, 0, 0, 0, 0, 509, -19)
+}
+point_count = 4
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_v63fr")
@@ -76,8 +81,12 @@ polygon = PackedVector2Array(-3, 0, 1156, -3, 1156, 652, -2, 651, -2, 20, -47, 6
 stream = ExtResource("6_ohcbt")
 autoplay = true
 
-[node name="1stBoss" parent="." instance=ExtResource("7_c4ih1")]
-position = Vector2(387, 13)
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_dfm3a")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(509, -19)
+rotates = false
 
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]

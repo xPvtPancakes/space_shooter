@@ -1,11 +1,43 @@
-[gd_scene load_steps=5 format=3 uid="uid://b5xhoolbxncqo"]
+[gd_scene load_steps=12 format=3 uid="uid://b5xhoolbxncqo"]
 
 [ext_resource type="Script" path="res://Scripts/blue_bullet.gd" id="1_6ex2u"]
 [ext_resource type="Texture2D" uid="uid://dt6gwhv31wkjf" path="res://Spritesheet/blue_bullet.png" id="1_34yor"]
 [ext_resource type="AudioStream" uid="uid://xe8oiweqgywc" path="res://Music and sounds/explosion.mp3" id="3_r28yn"]
+[ext_resource type="Texture2D" uid="uid://d5gh54u6vmhl" path="res://Spritesheet/Explosion/explosion00.png" id="4_wfpdy"]
+[ext_resource type="Texture2D" uid="uid://cjcf2t0ik0oan" path="res://Spritesheet/Explosion/explosion01.png" id="5_16c11"]
+[ext_resource type="Texture2D" uid="uid://88803ppkgn3o" path="res://Spritesheet/Explosion/explosion02.png" id="6_qri8a"]
+[ext_resource type="Texture2D" uid="uid://dsyn1o6j85u5i" path="res://Spritesheet/Explosion/explosion03.png" id="7_ni5k8"]
+[ext_resource type="Texture2D" uid="uid://dmdxbgmqyyulg" path="res://Spritesheet/Explosion/explosion04.png" id="8_llx8g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uo7al"]
 radius = 10.198
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_faqxj"]
+atlas = ExtResource("4_wfpdy")
+region = Rect2(0, 0, 583, 536)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_du420"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_faqxj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_16c11")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_qri8a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ni5k8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_llx8g")
+}],
+"loop": false,
+"name": &"default",
+"speed": 7.0
+}]
 
 [node name="Area2D" type="Area2D" groups=["player"]]
 script = ExtResource("1_6ex2u")
@@ -23,6 +55,13 @@ texture = ExtResource("1_34yor")
 [node name="Explosion_SE" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_r28yn")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-1.90735e-06, 2)
+scale = Vector2(0.0471698, 0.0522388)
+sprite_frames = SubResource("SpriteFrames_du420")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="finished" from="Explosion_SE" to="." method="_on_explosion_se_finished"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

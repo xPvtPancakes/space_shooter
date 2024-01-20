@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var enemy_fire : PackedScene
-var health = 11
+var health = 10
 var fire_mode = 1
 
 func shooting():
@@ -11,7 +11,7 @@ func shooting():
 		b.transform = $Gun1.global_transform
 		
 	if fire_mode == 2:
-		$Gun1.transform.position(-93, 50)
+		$Gun1.position = Vector2(-93, 50)
 		var b = enemy_fire.instantiate()
 		get_tree().root.add_child(b)
 		b.transform = $Gun1.global_transform
@@ -32,7 +32,7 @@ func health_loss():
 	$Invul_timer.start()
 	print(health)
 	
-	if health == 10:
+	if health == 5:
 		$Shoot_Timer.paused = true
 		fire_mode = 2
 		Second_Phase()
@@ -50,6 +50,8 @@ func _on_area_2d_area_entered(area):
 func Second_Phase():
 	for i in 18:
 		$Sprite2D.rotate(PI/18)
+		$Area2D/CollisionPolygon2D.rotate(PI/18)
+		$CollisionPolygon2D2.rotate(PI/18)
 		await(get_tree().create_timer(0.05).timeout)
 	await(get_tree().create_timer(3).timeout)
 	$Shoot_Timer.paused = false

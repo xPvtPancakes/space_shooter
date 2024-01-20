@@ -4,6 +4,7 @@ var player_health = 3
 #@export var Enemy_scene: PackedScene
 var enemy = preload("res://Scenes/green_enemy.tscn")
 var tri_shot = preload("res://Scenes/triple_shot_powerup.tscn")
+var first_boss = preload("res://Scenes/1stBoss.tscn")
 var score = 0
 signal hp_change
 var rng = RandomNumberGenerator.new()
@@ -29,7 +30,7 @@ func _on_score_up(adj_score):
 	
 	kill_counter += 1
 	
-	if kill_counter == 10:
+	if kill_counter == 1:
 		var x_rand_num =rng.randf_range(50, 1000)
 		var tri_shot_spawn = Vector2(0, 0)
 		var p = tri_shot.instantiate()
@@ -65,11 +66,11 @@ func Game_over():
 
 func _on_start_timer_timeout():
 	$EnemyTimer.wait_time = randf_range(rand_range_x,rand_range_y)
-	#$EnemyTimer.start()
-	print("disabled enemy timer in main game")
+	$EnemyTimer.start()
 	
 
-
+func _process(delta):
+	$Path2D/PathFollow2D.progress += delta * 00 
 
 
 

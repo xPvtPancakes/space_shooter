@@ -1,6 +1,6 @@
 extends Area2D
 
-var speed = 750
+var speed = 550
 signal health_changed
 
 func _physics_process(delta):
