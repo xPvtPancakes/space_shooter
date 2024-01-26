@@ -28,6 +28,7 @@ func _on_shoot_timer_timeout():
 func health_loss():
 	health -= 1
 	if health <= 0:
+		PlayerVariables.emit_signal("score_up", 500)
 		queue_free()
 	$Invul_timer.start()
 	print(health)

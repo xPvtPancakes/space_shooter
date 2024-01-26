@@ -11,6 +11,8 @@ var rng = RandomNumberGenerator.new()
 var kill_counter = 0
 var rand_range_x = 0.2
 var rand_range_y = 5
+@onready var path = $BossFight/PathFollow2D
+@onready var boss_spawn = $SpawnPath/PathFollow2D
 #@onready var anim = get_node ("AnimatedSprite2D")
 
 func _ready():
@@ -69,8 +71,23 @@ func _on_start_timer_timeout():
 	$EnemyTimer.start()
 	
 
+
+
+
+func Spawn_boss():
+	var boss_instance = first_boss.instantiate()
+	boss_spawn.add_child(boss_instance)
+	await(get_tree().create_timer(3).timeout)
+	if boss_spawn.progress_ratio > 0.99:
+		path.progress_ratio = 0
+		boss_spawn.remove_child(boss_instance)
+		path.add_child(boss_instance)
+
 func _process(delta):
-	$Path2D/PathFollow2D.progress += delta * 00 
+	path.progress += delta * 200 
+	boss_spawn.progress += delta * 200
+	print(boss_spawn.progress_ratio)
+	
 
 
 

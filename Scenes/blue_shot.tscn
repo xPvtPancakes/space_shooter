@@ -9,7 +9,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0jbwq"]
 size = Vector2(13, 37)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_faqxj"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1yah"]
 atlas = ExtResource("4_rlrln")
 region = Rect2(0, 0, 583, 536)
 
@@ -17,7 +17,7 @@ region = Rect2(0, 0, 583, 536)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_faqxj")
+"texture": SubResource("AtlasTexture_u1yah")
 }, {
 "duration": 1.0,
 "texture": ExtResource("5_caay3")
