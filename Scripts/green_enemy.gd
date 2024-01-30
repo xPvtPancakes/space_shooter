@@ -4,6 +4,7 @@ extends CharacterBody2D
 #var start_position = Vector2.ZERO
 var speed = 0
 @onready var screensize = get_viewport_rect().size
+@onready var type = $AnimatedSprite2D
 
 func start(_pos):
 	speed = 200
