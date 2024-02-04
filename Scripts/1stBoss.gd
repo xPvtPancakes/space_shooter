@@ -40,7 +40,7 @@ func health_loss():
 
 ##Getting hit with shots from the player
 func _on_area_2d_area_entered(area):
-	if area.is_in_group("player") and $Invul_timer.time_left == 0:
+	if area.is_in_group("player_fire") and $Invul_timer.time_left == 0:
 		health_loss()
 
 	#if area.is_in_group("player") and $Invul_timer.time_left > 0:

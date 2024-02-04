@@ -31,15 +31,35 @@ position = Vector2(-748, 498)
 top_level = true
 offset_right = 152.0
 offset_bottom = 24.0
+theme_override_fonts/font = ExtResource("6_00de0")
 text = "Score:"
+label_settings = SubResource("LabelSettings_kea5m")
+
+[node name="Score2" type="Label" parent="."]
+top_level = true
+offset_top = 60.0
+offset_right = 152.0
+offset_bottom = 84.0
+theme_override_fonts/font = ExtResource("6_00de0")
+text = "High Score:"
 label_settings = SubResource("LabelSettings_kea5m")
 
 [node name="Score_label" type="Label" parent="."]
 top_level = true
-offset_left = 50.0
-offset_top = 1.0
-offset_right = 136.0
-offset_bottom = 24.0
+offset_left = 73.0
+offset_top = -1.0
+offset_right = 159.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("6_00de0")
+text = "0"
+
+[node name="HighScoreLabel" type="Label" parent="."]
+top_level = true
+offset_left = 124.0
+offset_top = 59.0
+offset_right = 210.0
+offset_bottom = 83.0
+theme_override_fonts/font = ExtResource("6_00de0")
 text = "0"
 
 [node name="GameOver" type="Label" parent="."]
@@ -54,18 +74,31 @@ text = "Game Over"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="LevelClear" type="Label" parent="."]
+visible = false
+top_level = true
+offset_left = -2.0
+offset_right = 1151.0
+offset_bottom = 647.0
+theme_override_fonts/font = ExtResource("6_00de0")
+theme_override_font_sizes/font_size = 30
+text = "Level Clear"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="LivesSprite" type="Sprite2D" parent="."]
-position = Vector2(23, 34)
+position = Vector2(23, 40)
 scale = Vector2(0.400901, 0.364865)
 texture = ExtResource("6_uittp")
 region_enabled = true
 region_rect = Rect2(112, 792, 111, 74)
 
 [node name="Lives_label" type="Label" parent="."]
-offset_left = 49.0
-offset_top = 22.0
-offset_right = 135.0
-offset_bottom = 45.0
+offset_left = 50.0
+offset_top = 27.0
+offset_right = 136.0
+offset_bottom = 51.0
+theme_override_fonts/font = ExtResource("6_00de0")
 text = "3"
 
 [node name="Start_position" type="Marker2D" parent="."]

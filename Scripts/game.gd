@@ -12,6 +12,7 @@ var kill_counter = 0
 var kill_count_reset = 0
 var rand_range_x = 0.2
 var rand_range_y = 5
+var boss_flag = 0
 @onready var path = $BossFight/PathFollow2D
 @onready var boss_spawn = $SpawnPath/PathFollow2D
 #@onready var anim = get_node ("AnimatedSprite2D")
@@ -22,10 +23,18 @@ func _ready():
 	PlayerVariables.connect("player_health", _on_health_change)
 	$Lives_label.text = ": " + str(player_health)
 	New_game()
+	loadscores()
 	#spawn_enemies()
 
+func save(HighScores):
+	var file = FileAccess.open("C:/Test/SaveTest.txt", FileAccess.WRITE)
+	file.store_string(HighScores)
 
-
+func loadscores():
+	var file = FileAccess.open("C:/Test/SaveTest.txt", FileAccess.READ)
+	var content = file.get_as_text()
+	return content
+	$HighScoreLabel.text = content
 
 func _on_score_up(adj_score):
 	score += adj_score
@@ -47,7 +56,7 @@ func _on_score_up(adj_score):
 			rand_range_y = 0.2
 		$EnemyTimer.wait_time = randf_range(rand_range_x,rand_range_y)
 	
-	if score > 400:
+	if score > 400 && boss_flag == 0:
 		Spawn_boss()
 		$EnemyTimer.stop()
 
@@ -66,9 +75,12 @@ func New_game():
 	$blue_ship.position = $Start_position.position
 	$StartTimer.start()
 	
+	
+	
 func Game_over():
 	$EnemyTimer.stop()
 	$GameOver.set_deferred("visible", true)
+	save(str(score))
 	
 
 func _on_start_timer_timeout():
