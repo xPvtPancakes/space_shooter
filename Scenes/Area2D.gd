@@ -9,10 +9,8 @@ func _physics_process(delta):
 
 func _on_body_entered(body):
 	if body.is_in_group("enemy"):
-		body.queue_free()
 		$Explosion_SE.play()
 		speed = 0
-		PlayerVariables.emit_signal("score_up", 20)
 		$Sheet.set_deferred("visible", false)
 		$CollisionShape2D.set_deferred("disabled", true)
 		$Explosion_Sprite.play("default")

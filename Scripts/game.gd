@@ -9,6 +9,7 @@ var score = 0
 signal hp_change
 var rng = RandomNumberGenerator.new()
 var kill_counter = 0
+var kill_count_reset = 0
 var rand_range_x = 0.2
 var rand_range_y = 5
 @onready var path = $BossFight/PathFollow2D
@@ -32,7 +33,7 @@ func _on_score_up(adj_score):
 	
 	kill_counter += 1
 	
-	if kill_counter == 1:
+	if kill_counter == 10:
 		var x_rand_num =rng.randf_range(50, 1000)
 		var tri_shot_spawn = Vector2(0, 0)
 		var p = tri_shot.instantiate()
@@ -40,12 +41,16 @@ func _on_score_up(adj_score):
 		p.position = tri_shot_spawn
 		add_child.call_deferred(p)
 		kill_counter=0
+		kill_count_reset += 1
 		rand_range_y -= 0.1
 		if rand_range_y < 0.2:
 			rand_range_y = 0.2
 		$EnemyTimer.wait_time = randf_range(rand_range_x,rand_range_y)
-		print(rand_range_x)
-		print(rand_range_y)
+	
+	if score > 400:
+		Spawn_boss()
+		$EnemyTimer.stop()
+
 
 
 func _on_health_change(current_health):
@@ -76,6 +81,7 @@ func _on_start_timer_timeout():
 
 func Spawn_boss():
 	var boss_instance = first_boss.instantiate()
+	boss_spawn.progress_ratio = 0
 	boss_spawn.add_child(boss_instance)
 	await(get_tree().create_timer(3).timeout)
 	if boss_spawn.progress_ratio > 0.99:
@@ -86,25 +92,25 @@ func Spawn_boss():
 func _process(delta):
 	path.progress += delta * 200 
 	boss_spawn.progress += delta * 200
-	print(boss_spawn.progress_ratio)
+
 	
 
 
 
-func _on_enemy_timer_timeout():
-	var rand_num =rng.randf_range(-10, 10)
+func _on_enemy_timer_timeout(): #spawn enemies
+	var rand_num = rng.randf_range(-10, 10)
+	var enemy_type = (kill_count_reset / rng.randf_range(1, 3))
 	var y_rand_num = rng.randf_range(20, 300)
 	var enemy_spawn_location = Vector2(0, 0)
 	var e = enemy.instantiate()
 	if rand_num >= 0:
 		enemy_spawn_location.x = 0
-
 		enemy_spawn_location.y = y_rand_num
 
 	else:
 		enemy_spawn_location.x = get_viewport_rect().size.x
 		enemy_spawn_location.y = y_rand_num
-
+	e.set_type(enemy_type) #0: green enemy, 1: orange, 2: blue
 
 	e.position = enemy_spawn_location
 	add_child(e)

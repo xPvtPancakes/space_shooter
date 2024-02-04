@@ -3,8 +3,12 @@ extends CharacterBody2D
 @export var enemy_fire : PackedScene
 #var start_position = Vector2.ZERO
 var speed = 0
+var hp = 1
+var score = 20
 @onready var screensize = get_viewport_rect().size
-@onready var type = $AnimatedSprite2D
+
+var type_from_main
+
 
 func start(_pos):
 	speed = 200
@@ -16,9 +20,20 @@ func start(_pos):
 	$ShootTimer.wait_time = randf_range(1, 3)
 	$ShootTimer.start()
 
+func set_type(type_value):
+	type_from_main=type_value
+	if type_from_main >= 1 && type_from_main <= 2:
+		$EnemyType.play("orange")
+		hp = 2
+		score = 50
+	if type_from_main >= 2:
+		$EnemyType.play("blue")
+		hp = 3
+		score = 100
 
 	
 func _process(delta):
+
 
 	position.x += speed * delta
 	if position.x >= screensize.x &&  speed * delta > 0:
@@ -34,8 +49,6 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
 
 
-
-
 func shooting():
 	$Shoot_SE.play()
 	var b = enemy_fire.instantiate()
@@ -49,16 +62,41 @@ func _on_shoot_timer_timeout():
 
 
 
-
 func _on_area_2d_body_entered(body):
+	print(body.get_groups())
+	print(body)
 	if body.name == "blue_ship":
 		PlayerVariables.emit_signal("player_damage", -1)
-		$Explosion_SE.play()
 		speed=0
-		$Sheet.set_deferred("visible", false)
-		$ShootTimer.stop()
-		$CollisionPolygon2D.set_deferred("disabled", true)
+		dead()
 
+	
+			
+
+
+func dead():
+	$EnemyType.set_deferred("visible", false)
+	$ShootTimer.stop()
+	$CollisionPolygon2D2.set_deferred("disabled", true)
+	$Explosion_SE.play()
 
 func _on_explosion_se_finished():
 	queue_free()
+
+
+#func _on_area_2d_area_entered(area):
+	#if area.is_in_group("player_fire"):
+#
+		#hp -= 1
+		#if hp == 0:
+			#PlayerVariables.emit_signal("score_up", score)
+			#dead()
+			#$Explosion_SE.play()
+
+
+func _on_area_2d_area_entered(area):
+	if area.is_in_group("player_fire"):
+		hp -= 1
+		if hp == 0:
+			PlayerVariables.emit_signal("score_up", score)
+			dead()

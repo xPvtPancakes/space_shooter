@@ -10,11 +10,9 @@ func _physics_process(delta):
 func _on_body_entered(body):
 	if body.is_in_group("enemy"):
 		$Explosion_SE.play()
-		speed=0
-		body.queue_free()
-		PlayerVariables.emit_signal("score_up", 20)
+		#speed = 0
 		$BlueBullet.set_deferred("visible", false)
-		$CollisionShape2D.set_deferred("disabled", true)
+		#$CollisionShape2D.set_deferred("disabled", true)
 		$Explosion_Sprite.play("default")
 		$Explosion_Sprite.set_deferred("visible", true)
 	

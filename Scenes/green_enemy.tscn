@@ -48,9 +48,8 @@ position = Vector2(-1, -2)
 script = ExtResource("1_4jimc")
 enemy_fire = ExtResource("2_guihf")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(-139.4, -162.8)
-polygon = PackedVector2Array(111.4, 119.8, 131.4, 126.8, 131.4, 140.8, 149.4, 137.8, 150.4, 127.8, 168, 123, 186.4, 147.8, 166.4, 201.8, 151.4, 198.8, 154, 178, 153.4, 176.8, 129.4, 176.8, 122, 178, 127.4, 198.8, 113.4, 202.8, 95.4, 147.8)
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-9, 37, -24, 42, -45, -16, -29, -43, -7, -37, -8, -25, 9, -26, 11, -37, 30, -40, 45, -13, 25, 41, 11, 36, 16, 14, -15, 13)
 
 [node name="Guns" type="Marker2D" parent="."]
 position = Vector2(-1.4, 53.2)
@@ -80,12 +79,13 @@ stream = ExtResource("4_b8034")
 [node name="Explosion_SE" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_hbl5w")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="EnemyType" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_barpg")
 animation = &"green"
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
 [connection signal="timeout" from="MoveTimer" to="." method="_on_timer_timeout"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="finished" from="Explosion_SE" to="." method="_on_explosion_se_finished"]
