@@ -22,13 +22,13 @@ func _process(delta):
 script = ExtResource("1_asrv1")
 enemy_fire = ExtResource("2_ht64b")
 
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="." groups=["boss"]]
 polygon = PackedVector2Array(-205, -285, -122, -318, -16, -326, 21, -313, 31, -263, 12, -106, 20, -99, 47, -105, 78, -100, 151, -76, 171, -62, 190, -33, 198, -4, 161, 62, 139, 94, 114, 110, 119, 176, 103, 198, 75, 207, 51, 207, 28, 202, 10, 192, -15, 169, -39, 151, -94, 118, -96, 42, -172, -58, -196, -149, -206, -230)
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["boss"]]
 script = SubResource("GDScript_xjbkn")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" groups=["boss"]]
 polygon = PackedVector2Array(-205, -285, -122, -318, -16, -326, 21, -313, 31, -263, 12, -106, 20, -99, 47, -105, 78, -100, 151, -76, 171, -62, 190, -33, 198, -4, 161, 62, 139, 94, 114, 110, 119, 176, 103, 198, 75, 207, 51, 207, 28, 202, 10, 192, -15, 169, -39, 151, -94, 118, -96, 42, -172, -58, -196, -149, -206, -230)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -47,7 +47,6 @@ rotation = 0.349066
 
 [node name="Shoot_Timer" type="Timer" parent="."]
 wait_time = 0.5
-autostart = true
 
 [node name="Invul_timer" type="Timer" parent="."]
 wait_time = 2.0

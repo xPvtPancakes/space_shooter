@@ -48,8 +48,8 @@ position = Vector2(-1, -2)
 script = ExtResource("1_4jimc")
 enemy_fire = ExtResource("2_guihf")
 
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-9, 37, -24, 42, -45, -16, -29, -43, -7, -37, -8, -25, 9, -26, 11, -37, 30, -40, 45, -13, 25, 41, 11, 36, 16, 14, -15, 13)
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="." groups=["enemy"]]
+polygon = PackedVector2Array(-9, 37, -24, 42, -45, -16, -29, -43, -7, -37, -8, -25, 9, -26, 11, -37, 30, -40, 46, -15, 25, 41, 11, 36, 16, 14, -15, 13)
 
 [node name="Guns" type="Marker2D" parent="."]
 position = Vector2(-1.4, 53.2)
@@ -68,10 +68,10 @@ autostart = true
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["enemy"]]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
-polygon = PackedVector2Array(-9, 37, -24, 42, -45, -16, -29, -43, -7, -37, -8, -25, 9, -26, 11, -37, 30, -40, 45, -13, 25, 41, 11, 36, 16, 14, -15, 13)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" groups=["enemy"]]
+polygon = PackedVector2Array(-9, 37, -24, 42, -45, -16, -29, -43, -7, -37, -8, -25, 9, -26, 11, -37, 30, -40, 46, -15, 25, 41, 11, 36, 16, 14, -15, 13)
 
 [node name="Shoot_SE" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_b8034")

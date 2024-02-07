@@ -4,6 +4,10 @@ extends CharacterBody2D
 var health = 10
 var fire_mode = 1
 
+func spawn():
+	await(get_tree().create_timer(3).timeout)
+	$Shoot_Timer.start()
+
 func shooting():
 	if fire_mode == 1:
 		var b = enemy_fire.instantiate()
@@ -28,7 +32,8 @@ func _on_shoot_timer_timeout():
 func health_loss():
 	health -= 1
 	if health <= 0:
-		PlayerVariables.emit_signal("score_up", 500)
+		PlayerVariables.emit_signal("score_up", 5000)
+		PlayerVariables.emit_signal("first_boss")
 		queue_free()
 	$Invul_timer.start()
 	print(health)

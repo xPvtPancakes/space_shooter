@@ -63,12 +63,11 @@ func _on_shoot_timer_timeout():
 
 
 func _on_area_2d_body_entered(body):
-	print(body.get_groups())
-	print(body)
-	if body.name == "blue_ship":
-		PlayerVariables.emit_signal("player_damage", -1)
-		speed=0
-		dead()
+	pass
+	#if body.name == "blue_ship":
+		#PlayerVariables.emit_signal("player_damage", -1)
+		#speed=0
+		#dead()
 
 	
 			
@@ -76,8 +75,11 @@ func _on_area_2d_body_entered(body):
 
 func dead():
 	$EnemyType.set_deferred("visible", false)
+	$Area2D.set_deferred("monitorable", false)
+	$Area2D.set_deferred("monitoring", false)
 	$ShootTimer.stop()
 	$CollisionPolygon2D2.set_deferred("disabled", true)
+	$Area2D.set_deferred("monitoring", false)
 	$Explosion_SE.play()
 
 func _on_explosion_se_finished():
@@ -97,6 +99,11 @@ func _on_explosion_se_finished():
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("player_fire"):
 		hp -= 1
+		print(hp)
 		if hp == 0:
 			PlayerVariables.emit_signal("score_up", score)
 			dead()
+	if area.is_in_group("player"):
+		PlayerVariables.emit_signal("player_damage", -1)
+		speed=0
+		dead()

@@ -7,9 +7,10 @@ func _physics_process(delta):
 	position += transform.y * speed * delta
 
 
-func _on_ts_area_body_entered(body):
-	if body.name == "blue_ship":
-		powerup()
+#func _on_ts_area_body_entered(body):
+	#print(body)
+	#if body.name == "blue_ship":
+		#powerup()
 
 
 
@@ -19,5 +20,5 @@ func powerup():
 
 
 func _on_ts_area_area_entered(area):
-	if area.name == "blue_shot":
+	if area.name == "blue_shot" || "blue_ship":
 		powerup()

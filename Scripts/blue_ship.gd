@@ -16,10 +16,7 @@ func _ready():
 func get_input():
 	var direction = Input.get_vector("Left", "Right", "Up", "Down")
 	velocity = direction * speed
-	#var pos = $Blue_ship_sprite.position
-	#pos.x = clamp(pos.x, 0, get_viewport_rect().size.x)
-	#pos.y = clamp(pos.y, 0, get_viewport_rect().size.y)
-	#global_position = pos
+
 	
 	if Input.is_action_just_pressed("Space"):
 		if can_shoot == true:
@@ -61,20 +58,19 @@ func _on_player_damage(hp_change):
 	
 	PlayerVariables.emit_signal("player_health", health)
 	
-	
 
-	
 	if health <= 0:
 		$Explosion_SE.play()
-		$Blue_ship_sprite.set_deferred("visible", false)
+		#$Blue_ship_sprite.set_deferred("visible", false)
 		$Iframe_Animation.set_deferred("visible", false)
+		$player_diameter/CollisionPolygon2D.set_deferred("disabled", true)
 		can_shoot = false
 	else:
 		$Explosion_SE2.play()
 		$player_diameter/CollisionPolygon2D.set_deferred("disabled", true)
-		$Blue_ship_sprite.set_deferred("visible", false)
+		#$Blue_ship_sprite.set_deferred("visible", false)
 		$Iframe_Animation.play("iframes")
-		$Iframe_Animation.set_deferred("visible", true)
+		#$Iframe_Animation.set_deferred("visible", true)
 		$Iframe_Timer.start()
 
 
@@ -82,8 +78,9 @@ func _on_player_damage(hp_change):
 
 func _on_timer_timeout():
 	$player_diameter/CollisionPolygon2D.set_deferred("disabled", false)
-	$Blue_ship_sprite.set_deferred("visible", true)
-	$Iframe_Animation.set_deferred("visible", false)
+	$Iframe_Animation.play("default")
+	#$Blue_ship_sprite.set_deferred("visible", true)
+	#$Iframe_Animation.set_deferred("visible", false)
 
 func _on_TS_signal(TSFlag):
 	TS_flag = TSFlag

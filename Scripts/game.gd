@@ -11,7 +11,7 @@ var rng = RandomNumberGenerator.new()
 var kill_counter = 0
 var kill_count_reset = 0
 var rand_range_x = 0.2
-var rand_range_y = 5
+var rand_range_y = 3
 var boss_flag = 0
 @onready var path = $BossFight/PathFollow2D
 @onready var boss_spawn = $SpawnPath/PathFollow2D
@@ -21,6 +21,7 @@ func _ready():
 	#PlayerVariables.connect("player_damage", _on_player_damage)
 	PlayerVariables.connect("score_up", _on_score_up)
 	PlayerVariables.connect("player_health", _on_health_change)
+	PlayerVariables.connect("first_boss", _on_first_boss_defeat)
 	$Lives_label.text = ": " + str(player_health)
 	New_game()
 	loadscores()
@@ -51,12 +52,13 @@ func _on_score_up(adj_score):
 		add_child.call_deferred(p)
 		kill_counter=0
 		kill_count_reset += 1
-		rand_range_y -= 0.1
-		if rand_range_y < 0.2:
-			rand_range_y = 0.2
-		$EnemyTimer.wait_time = randf_range(rand_range_x,rand_range_y)
+		#rand_range_y -= 0.1
+		#if rand_range_y < 0.2:
+			#rand_range_y = 0.2
+		#$EnemyTimer.wait_time = randf_range(rand_range_x,rand_range_y)
 	
-	if score > 400 && boss_flag == 0:
+	if score > 2000 && boss_flag == 0:
+		boss_flag = 1
 		Spawn_boss()
 		$EnemyTimer.stop()
 
@@ -73,6 +75,7 @@ func _on_health_change(current_health):
 	
 func New_game():
 	$blue_ship.position = $Start_position.position
+	$blue_ship.collision_layer = 10
 	$StartTimer.start()
 	
 	
@@ -81,11 +84,14 @@ func Game_over():
 	$EnemyTimer.stop()
 	$GameOver.set_deferred("visible", true)
 	save(str(score))
+	$RestartButton.set_deferred("visible", true)
+	$RestartButton.set_deferred("disabled", false)
 	
 
 func _on_start_timer_timeout():
 	$EnemyTimer.wait_time = randf_range(rand_range_x,rand_range_y)
 	$EnemyTimer.start()
+
 	
 
 
@@ -94,7 +100,8 @@ func _on_start_timer_timeout():
 func Spawn_boss():
 	var boss_instance = first_boss.instantiate()
 	boss_spawn.progress_ratio = 0
-	boss_spawn.add_child(boss_instance)
+	boss_spawn.call_deferred("add_child", boss_instance)
+	boss_instance.spawn()
 	await(get_tree().create_timer(3).timeout)
 	if boss_spawn.progress_ratio > 0.99:
 		path.progress_ratio = 0
@@ -104,12 +111,24 @@ func Spawn_boss():
 func _process(delta):
 	path.progress += delta * 200 
 	boss_spawn.progress += delta * 200
-
+	
 	
 
 
 
 func _on_enemy_timer_timeout(): #spawn enemies
+	print($EnemyTimer.wait_time)
+	if kill_count_reset <= 0:
+		spawn_enemy()
+	else:
+		for i in kill_count_reset+1:
+			spawn_enemy()
+			await(get_tree().create_timer(0.5).timeout)
+			print(kill_count_reset)
+	
+	
+	
+func spawn_enemy():
 	var rand_num = rng.randf_range(-10, 10)
 	var enemy_type = (kill_count_reset / rng.randf_range(1, 3))
 	var y_rand_num = rng.randf_range(20, 300)
@@ -127,5 +146,12 @@ func _on_enemy_timer_timeout(): #spawn enemies
 	e.position = enemy_spawn_location
 	add_child(e)
 	e.start(enemy_spawn_location)
+	$EnemyTimer.wait_time = randf_range(rand_range_x,rand_range_y)
 
 
+
+func _on_restart_button_pressed():
+	get_tree().reload_current_scene()
+
+func _on_first_boss_defeat():
+	$EndOfDemo.set_deferred("visible", true)

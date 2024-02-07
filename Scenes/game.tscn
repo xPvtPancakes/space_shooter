@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dwfhd5do06amr"]
+[gd_scene load_steps=11 format=3 uid="uid://dwfhd5do06amr"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_v63fr"]
 [ext_resource type="PackedScene" uid="uid://cjbekul01iach" path="res://Scenes/blue_ship.tscn" id="2_g10mx"]
@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://dx54b7ql4q8lc" path="res://Kenney Blocks.ttf" id="6_00de0"]
 [ext_resource type="AudioStream" uid="uid://bddvxysad18ad" path="res://Music and sounds/Main Theme - Star Fox 64 [64] - Super Smash Bros. Ultimate.mp3" id="6_ohcbt"]
 [ext_resource type="Texture2D" uid="uid://cnep1umono3ew" path="res://Spritesheet/sheet.png" id="6_uittp"]
+[ext_resource type="PackedScene" uid="uid://h0t2m8l38p4f" path="res://Scenes/triple_shot_powerup.tscn" id="7_x34jj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kea5m"]
 
@@ -74,6 +75,29 @@ text = "Game Over"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="EndOfDemo" type="Label" parent="."]
+visible = false
+top_level = true
+offset_left = -2.0
+offset_right = 1151.0
+offset_bottom = 647.0
+theme_override_fonts/font = ExtResource("6_00de0")
+theme_override_font_sizes/font_size = 30
+text = "More Coming Soon!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" type="Button" parent="."]
+visible = false
+layout_direction = 1
+offset_left = 525.0
+offset_top = 408.0
+offset_right = 617.0
+offset_bottom = 440.0
+theme_override_fonts/font = ExtResource("6_00de0")
+disabled = true
+text = "Restart"
+
 [node name="LevelClear" type="Label" parent="."]
 visible = false
 top_level = true
@@ -138,5 +162,9 @@ position = Vector2(497, -340)
 rotates = false
 loop = false
 
+[node name="Triple_shot_powerup" parent="." instance=ExtResource("7_x34jj")]
+position = Vector2(452, 116)
+
+[connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
