@@ -87,6 +87,13 @@ text = "More Coming Soon!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="LineEdit" type="LineEdit" parent="."]
+visible = false
+offset_left = 530.0
+offset_top = 236.0
+offset_right = 597.063
+offset_bottom = 267.0
+
 [node name="RestartButton" type="Button" parent="."]
 visible = false
 layout_direction = 1
@@ -165,6 +172,7 @@ loop = false
 [node name="Triple_shot_powerup" parent="." instance=ExtResource("7_x34jj")]
 position = Vector2(452, 116)
 
+[connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]

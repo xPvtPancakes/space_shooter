@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 PlayerVariables="*res://Scenes/player_variables.tscn"
+SaveData="*res://Scripts/SaveData.gd"
 
 [display]
 

@@ -5,6 +5,8 @@ var player_health = 3
 var enemy = preload("res://Scenes/green_enemy.tscn")
 var tri_shot = preload("res://Scenes/triple_shot_powerup.tscn")
 var first_boss = preload("res://Scenes/1stBoss.tscn")
+var high_score
+var SaveFile = ("user://scoresave.tres")
 var score = 0
 signal hp_change
 var rng = RandomNumberGenerator.new()
@@ -15,7 +17,7 @@ var rand_range_y = 3
 var boss_flag = 0
 @onready var path = $BossFight/PathFollow2D
 @onready var boss_spawn = $SpawnPath/PathFollow2D
-#@onready var anim = get_node ("AnimatedSprite2D")
+
 
 func _ready():
 	#PlayerVariables.connect("player_damage", _on_player_damage)
@@ -24,18 +26,48 @@ func _ready():
 	PlayerVariables.connect("first_boss", _on_first_boss_defeat)
 	$Lives_label.text = ": " + str(player_health)
 	New_game()
+
 	loadscores()
 	#spawn_enemies()
 
 func save(HighScores):
-	var file = FileAccess.open("C:/Test/SaveTest.txt", FileAccess.WRITE)
-	file.store_string(HighScores)
-
+	var file = FileAccess.open(SaveFile, FileAccess.WRITE)
+	file.store_32(HighScores)
+#
 func loadscores():
-	var file = FileAccess.open("C:/Test/SaveTest.txt", FileAccess.READ)
-	var content = file.get_as_text()
-	return content
-	$HighScoreLabel.text = content
+	var file = FileAccess.open(SaveFile, FileAccess.READ)
+	if FileAccess.file_exists(SaveFile):
+		var content = file.get_32()
+		high_score = content
+		$HighScoreLabel.text = str(content)
+
+#func Update_Highscores(player_name):
+	#var name = player_name
+	#high_score[name] = score
+	#
+	#while high_score.size() > 10:
+		#var lowest_value = 100
+		#for entry in high_score:
+			#if high_score[entry] < lowest_value:
+				#lowest_value = high_score[entry]
+		#
+		#for logged in high_score:
+			#if high_score[logged] == lowest_value:
+				#high_score.erase(logged)
+	#order_highscores(high_score)
+	#SaveData.save_game()
+	#
+#func order_highscores(scores: Dictionary) -> Dictionary:
+	#var original_dict: Dictionary = high_score.duplicate()
+	#var ordered_dict: Dictionary
+	#for i in original_dict.size():
+		#var highest_score: int = 0
+		#for entry in original_dict:
+			#if original_dict[entry] > highest_score:
+				#highest_score = original_dict[entry]
+			#ordered_dict[original_dict.find_key(highest_score)] = highest_score
+			#original_dict.erase(original_dict.find_key(highest_score))
+	#return ordered_dict
 
 func _on_score_up(adj_score):
 	score += adj_score
@@ -83,9 +115,11 @@ func New_game():
 func Game_over():
 	$EnemyTimer.stop()
 	$GameOver.set_deferred("visible", true)
-	save(str(score))
+	if score > high_score:
+		save(score)
 	$RestartButton.set_deferred("visible", true)
 	$RestartButton.set_deferred("disabled", false)
+	#$LineEdit.set_deferred("visible", true)
 	
 
 func _on_start_timer_timeout():
@@ -155,3 +189,8 @@ func _on_restart_button_pressed():
 
 func _on_first_boss_defeat():
 	$EndOfDemo.set_deferred("visible", true)
+
+
+func _on_line_edit_text_submitted(name_entered):
+	#Update_Highscores(name_entered)
+	pass
