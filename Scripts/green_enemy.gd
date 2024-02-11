@@ -107,3 +107,6 @@ func _on_area_2d_area_entered(area):
 		PlayerVariables.emit_signal("player_damage", -1)
 		speed=0
 		dead()
+	if area.name == "Railgun":
+		PlayerVariables.emit_signal("score_up", score)
+		dead()

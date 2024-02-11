@@ -24,3 +24,5 @@ func _on_area_2d_area_entered(area):
 	if area.name == "player_diameter":
 		PlayerVariables.emit_signal("player_damage", -1)
 		queue_free()
+	if area.name == "Railgun":
+		queue_free()

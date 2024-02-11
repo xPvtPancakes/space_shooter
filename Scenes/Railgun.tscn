@@ -1,13 +1,85 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpokj4sa0f8lb"]
+[gd_scene load_steps=13 format=3 uid="uid://dpokj4sa0f8lb"]
+
+[ext_resource type="Script" path="res://Scripts/Railgun.gd" id="1_gvouq"]
+[ext_resource type="Texture2D" uid="uid://chs10ahlyaf8q" path="res://Spritesheet/waterfall.png" id="2_ehrq2"]
+[ext_resource type="Texture2D" uid="uid://dt6gwhv31wkjf" path="res://Spritesheet/blue_bullet.png" id="3_682iq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l63sv"]
+size = Vector2(103, 636.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqbx0"]
+atlas = ExtResource("2_ehrq2")
+region = Rect2(0, 0, 36, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6k4tx"]
+atlas = ExtResource("2_ehrq2")
+region = Rect2(36, 0, 36, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_csar3"]
+atlas = ExtResource("2_ehrq2")
+region = Rect2(72, 0, 36, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w03iw"]
+atlas = ExtResource("2_ehrq2")
+region = Rect2(108, 0, 36, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lwlxe"]
+atlas = ExtResource("2_ehrq2")
+region = Rect2(144, 0, 36, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axgr0"]
+atlas = ExtResource("2_ehrq2")
+region = Rect2(180, 0, 36, 63)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_12boh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sqbx0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6k4tx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_csar3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w03iw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lwlxe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axgr0")
+}],
+"loop": true,
+"name": &"Laser",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_682iq")
+}],
+"loop": true,
+"name": &"Start",
+"speed": 5.0
+}]
 
-[node name="Area2D" type="Area2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_8f3cw"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Railgun" type="Area2D" groups=["railgun"]]
+script = ExtResource("1_gvouq")
+
+[node name="Full_shot" type="CollisionShape2D" parent="."]
+position = Vector2(-3.8147e-06, -317.25)
 shape = SubResource("RectangleShape2D_l63sv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-3.8147e-06, -317.438)
+rotation = 3.14159
+scale = Vector2(2.94444, 10.0813)
 sprite_frames = SubResource("SpriteFrames_12boh")
+animation = &"Laser"
+
+[node name="Beginning_charge" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8f3cw")

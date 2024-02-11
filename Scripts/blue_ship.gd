@@ -5,9 +5,12 @@ const speed = 500
 var health = 3
 var TS_flag = false
 var can_shoot = true
+var railgun_shots = 3
+var rail_array
 
 @export var blue_shot : PackedScene = preload("res://Scenes/blue_shot.tscn")
 @export var blue_bullet : PackedScene = preload("res://Scenes/blue_bullet.tscn")
+@export var rail_gun: PackedScene = preload("res://Scenes/Railgun.tscn")
 
 func _ready():
 	PlayerVariables.connect("player_damage", _on_player_damage)
@@ -16,12 +19,24 @@ func _ready():
 func get_input():
 	var direction = Input.get_vector("Left", "Right", "Up", "Down")
 	velocity = direction * speed
+	if Input.is_action_just_pressed("Railgun") && railgun_shots > 0:
+		railgun()
+	
 
 	
 	if Input.is_action_just_pressed("Space"):
 		if can_shoot == true:
 			shooting()
 
+func railgun():
+	if get_tree().get_nodes_in_group("railgun").is_empty():
+		var b = rail_gun.instantiate()
+		railgun_shots -= 1
+		add_child(b)
+		b.transform = $Guns.transform
+		await(get_tree().create_timer(3).timeout)
+		remove_child(b)
+	
 
 
 func shooting():
