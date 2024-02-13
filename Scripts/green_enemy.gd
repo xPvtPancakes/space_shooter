@@ -2,16 +2,17 @@ extends CharacterBody2D
 
 @export var enemy_fire : PackedScene
 #var start_position = Vector2.ZERO
-var speed = 0
+var speed = 200
 var hp = 1
 var score = 20
+
 @onready var screensize = get_viewport_rect().size
 
 var type_from_main
 
 
 func start(_pos):
-	speed = 200
+	#speed = 200
 
 	await get_tree().create_timer(randf_range(0.25, 0.55)).timeout
 
@@ -26,10 +27,12 @@ func set_type(type_value):
 		$EnemyType.play("orange")
 		hp = 2
 		score = 50
+		speed = 500
 	if type_from_main >= 2:
 		$EnemyType.play("blue")
 		hp = 3
 		score = 100
+		speed = 700
 
 	
 func _process(delta):

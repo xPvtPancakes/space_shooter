@@ -2,10 +2,10 @@ extends CharacterBody2D
 
 const speed = 500
 
-var health = 3
+#var health = 3
 var TS_flag = false
 var can_shoot = true
-var railgun_shots = 3
+#var railgun_shots = PlayerVariables.railcharge
 var rail_array
 
 @export var blue_shot : PackedScene = preload("res://Scenes/blue_shot.tscn")
@@ -15,11 +15,12 @@ var rail_array
 func _ready():
 	PlayerVariables.connect("player_damage", _on_player_damage)
 	PlayerVariables.connect("triple_shot", _on_TS_signal)
+	PlayerVariables.connect("rail_charges", _on_Rail_increase)
 	
 func get_input():
 	var direction = Input.get_vector("Left", "Right", "Up", "Down")
 	velocity = direction * speed
-	if Input.is_action_just_pressed("Railgun") && railgun_shots > 0:
+	if Input.is_action_just_pressed("Railgun") && PlayerVariables.railcharge > 0:
 		railgun()
 	
 
@@ -31,12 +32,15 @@ func get_input():
 func railgun():
 	if get_tree().get_nodes_in_group("railgun").is_empty():
 		var b = rail_gun.instantiate()
-		railgun_shots -= 1
+		PlayerVariables.railcharge -= 1
 		add_child(b)
 		b.transform = $Guns.transform
 		await(get_tree().create_timer(3).timeout)
 		remove_child(b)
-	
+
+
+func _on_Rail_increase(increase):
+	PlayerVariables.railcharge += increase
 
 
 func shooting():
@@ -68,15 +72,14 @@ func _physics_process(_delta):
 		#print("areadamage")
 
 func _on_player_damage(hp_change):
-	health += hp_change
+	PlayerVariables.health += hp_change
 	TS_flag = false
 	
-	PlayerVariables.emit_signal("player_health", health)
+	PlayerVariables.emit_signal("player_health")
 	
 
-	if health <= 0:
+	if PlayerVariables.health <= 0:
 		$Explosion_SE.play()
-		#$Blue_ship_sprite.set_deferred("visible", false)
 		$Iframe_Animation.set_deferred("visible", false)
 		$player_diameter/CollisionPolygon2D.set_deferred("disabled", true)
 		can_shoot = false

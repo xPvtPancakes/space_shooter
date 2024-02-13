@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dwfhd5do06amr"]
+[gd_scene load_steps=12 format=3 uid="uid://dwfhd5do06amr"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_v63fr"]
 [ext_resource type="PackedScene" uid="uid://cjbekul01iach" path="res://Scenes/blue_ship.tscn" id="2_g10mx"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://bddvxysad18ad" path="res://Music and sounds/Main Theme - Star Fox 64 [64] - Super Smash Bros. Ultimate.mp3" id="6_ohcbt"]
 [ext_resource type="Texture2D" uid="uid://cnep1umono3ew" path="res://Spritesheet/sheet.png" id="6_uittp"]
 [ext_resource type="PackedScene" uid="uid://h0t2m8l38p4f" path="res://Scenes/triple_shot_powerup.tscn" id="7_x34jj"]
+[ext_resource type="PackedScene" uid="uid://cbg551gcxxdqy" path="res://Scenes/green_enemy.tscn" id="8_t63ek"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kea5m"]
 
@@ -86,6 +87,21 @@ theme_override_font_sizes/font_size = 30
 text = "More Coming Soon!"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="RailCharges" type="Label" parent="."]
+offset_left = 1095.0
+offset_right = 1135.0
+offset_bottom = 24.0
+theme_override_fonts/font = ExtResource("6_00de0")
+text = "F:"
+
+[node name="RailCharges2" type="Label" parent="."]
+offset_left = 1119.0
+offset_top = -1.0
+offset_right = 1159.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("6_00de0")
+text = "From Code"
 
 [node name="LineEdit" type="LineEdit" parent="."]
 visible = false
@@ -170,7 +186,10 @@ rotates = false
 loop = false
 
 [node name="Triple_shot_powerup" parent="." instance=ExtResource("7_x34jj")]
-position = Vector2(452, 116)
+position = Vector2(532, 98)
+
+[node name="green_enemy" parent="." instance=ExtResource("8_t63ek")]
+position = Vector2(535, 209)
 
 [connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]

@@ -1,7 +1,6 @@
 extends Node2D
 
-var player_health = 3
-#@export var Enemy_scene: PackedScene
+#var player_health = 3
 var enemy = preload("res://Scenes/green_enemy.tscn")
 var tri_shot = preload("res://Scenes/triple_shot_powerup.tscn")
 var first_boss = preload("res://Scenes/1stBoss.tscn")
@@ -12,9 +11,10 @@ signal hp_change
 var rng = RandomNumberGenerator.new()
 var kill_counter = 0
 var kill_count_reset = 0
+var kills_without_death = 0
 var rand_range_x = 0.2
 var rand_range_y = 3
-var boss_flag = 0
+var boss_flag_1 = 0
 @onready var path = $BossFight/PathFollow2D
 @onready var boss_spawn = $SpawnPath/PathFollow2D
 
@@ -24,7 +24,9 @@ func _ready():
 	PlayerVariables.connect("score_up", _on_score_up)
 	PlayerVariables.connect("player_health", _on_health_change)
 	PlayerVariables.connect("first_boss", _on_first_boss_defeat)
-	$Lives_label.text = ": " + str(player_health)
+	#PlayerVariables.connect("rail_charges", _on_Rail_shot)
+	$RailCharges2.text = str(PlayerVariables.railcharge)
+	$Lives_label.text = ": " + str(PlayerVariables.health)
 	New_game()
 
 	loadscores()
@@ -74,7 +76,7 @@ func _on_score_up(adj_score):
 	$Score_label.text = str(score)
 	
 	kill_counter += 1
-	
+
 	if kill_counter == 10:
 		var x_rand_num =rng.randf_range(50, 1000)
 		var tri_shot_spawn = Vector2(0, 0)
@@ -84,25 +86,23 @@ func _on_score_up(adj_score):
 		add_child.call_deferred(p)
 		kill_counter=0
 		kill_count_reset += 1
-		#rand_range_y -= 0.1
-		#if rand_range_y < 0.2:
-			#rand_range_y = 0.2
-		#$EnemyTimer.wait_time = randf_range(rand_range_x,rand_range_y)
+
+	kills_without_death += 1
+	if kills_without_death >= 20:
+		kills_without_death = 0
+		PlayerVariables.emit_signal("rail_charges", 1)
 	
-	if score > 2000 && boss_flag == 0:
-		boss_flag = 1
+	if score > 5000 && boss_flag_1 == 0:
+		boss_flag_1 = 1
 		Spawn_boss()
 		$EnemyTimer.stop()
 
 
 
-func _on_health_change(current_health):
-	player_health=current_health
-	$Lives_label.text = ": " + str(player_health)
+func _on_health_change():
+
 	$blue_ship.position = $Start_position.position
-	if player_health == 0:
-		if self.is_in_group("enemy"):
-			queue_free()
+	if PlayerVariables.health <= 0:
 		Game_over()
 	
 func New_game():
@@ -119,10 +119,13 @@ func Game_over():
 		save(score)
 	$RestartButton.set_deferred("visible", true)
 	$RestartButton.set_deferred("disabled", false)
-	#$LineEdit.set_deferred("visible", true)
+	for i in get_tree().get_nodes_in_group("enemy"):
+		remove_child(i)
+	for i in get_tree().get_nodes_in_group("Enemy_fire"):
+		remove_child(i)
 	
 
-func _on_start_timer_timeout():
+func _on_start_timer_timeout(): #start game
 	$EnemyTimer.wait_time = randf_range(rand_range_x,rand_range_y)
 	$EnemyTimer.start()
 
@@ -135,30 +138,30 @@ func Spawn_boss():
 	var boss_instance = first_boss.instantiate()
 	boss_spawn.progress_ratio = 0
 	boss_spawn.call_deferred("add_child", boss_instance)
-	boss_instance.spawn()
+
 	await(get_tree().create_timer(3).timeout)
 	if boss_spawn.progress_ratio > 0.99:
 		path.progress_ratio = 0
 		boss_spawn.remove_child(boss_instance)
 		path.add_child(boss_instance)
 
-func _process(delta):
+func _process(delta): #refresh every frame
 	path.progress += delta * 200 
 	boss_spawn.progress += delta * 200
-	
-	
+	$RailCharges2.text = str(PlayerVariables.railcharge)
+	$Lives_label.text = ": " + str(PlayerVariables.health)
 
 
 
 func _on_enemy_timer_timeout(): #spawn enemies
-	print($EnemyTimer.wait_time)
+
 	if kill_count_reset <= 0:
 		spawn_enemy()
 	else:
 		for i in kill_count_reset+1:
 			spawn_enemy()
 			await(get_tree().create_timer(0.5).timeout)
-			print(kill_count_reset)
+
 	
 	
 	

@@ -65,21 +65,26 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8f3cw"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_0oxan"]
+radius = 20.0
 
-[node name="Railgun" type="Area2D" groups=["railgun"]]
+[node name="Railgun" type="Area2D" groups=["player_fire", "railgun"]]
 script = ExtResource("1_gvouq")
 
 [node name="Full_shot" type="CollisionShape2D" parent="."]
 position = Vector2(-3.8147e-06, -317.25)
 shape = SubResource("RectangleShape2D_l63sv")
+disabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-3.8147e-06, -317.438)
+position = Vector2(2.38742e-12, -43)
 rotation = 3.14159
-scale = Vector2(2.94444, 10.0813)
+scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_12boh")
-animation = &"Laser"
+animation = &"Start"
+frame_progress = 0.505807
 
-[node name="Beginning_charge" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_8f3cw")
+[node name="Start_shape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -42)
+scale = Vector2(0.3, 0.3)
+shape = SubResource("CircleShape2D_0oxan")

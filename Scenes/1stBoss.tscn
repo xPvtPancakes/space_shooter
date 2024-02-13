@@ -46,7 +46,8 @@ position = Vector2(-93, 50)
 rotation = 0.349066
 
 [node name="Shoot_Timer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 3.5
+autostart = true
 
 [node name="Invul_timer" type="Timer" parent="."]
 wait_time = 2.0
