@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dhlfgem7pfjl0"
+path="res://.godot/imported/sound-effect-twinklesparkle-115095.mp3-12a237379979113e3c73f8df779c9748.mp3str"
+
+[deps]
+
+source_file="res://Music and sounds/sound-effect-twinklesparkle-115095.mp3"
+dest_files=["res://.godot/imported/sound-effect-twinklesparkle-115095.mp3-12a237379979113e3c73f8df779c9748.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

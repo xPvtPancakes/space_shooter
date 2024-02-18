@@ -98,6 +98,7 @@ func _on_score_up(adj_score):
 	if score_for_life > 5000:
 		PlayerVariables.health += 1
 		score_for_life = 0
+		$LifeUp_se.play()
 	
 	if score > 5000 && boss_flag_1 == 0:
 		boss_flag_1 = 1
