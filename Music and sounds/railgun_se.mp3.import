@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bhhcfqg65qsru"
+path="res://.godot/imported/railgun_se.mp3-b688cac02233e09d84c4baa4623ca353.mp3str"
+
+[deps]
+
+source_file="res://Music and sounds/railgun_se.mp3"
+dest_files=["res://.godot/imported/railgun_se.mp3-b688cac02233e09d84c4baa4623ca353.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

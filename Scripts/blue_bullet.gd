@@ -7,9 +7,6 @@ func _physics_process(delta):
 	position += transform.y * speed * delta * -1
 
 
-func _on_body_entered(body):
-	pass
-
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
 
@@ -29,7 +26,7 @@ func _on_boss_explosion_sprite_animation_finished():
 
 
 func _on_area_entered(area):
-	if area.is_in_group("enemy"):
+	if area.is_in_group("enemy") or area.is_in_group("comet"):
 		$Explosion_SE.play()
 		speed = 0
 		$BlueBullet.set_deferred("visible", false)

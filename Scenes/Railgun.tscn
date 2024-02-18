@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://dpokj4sa0f8lb"]
+[gd_scene load_steps=14 format=3 uid="uid://dpokj4sa0f8lb"]
 
 [ext_resource type="Script" path="res://Scripts/Railgun.gd" id="1_gvouq"]
 [ext_resource type="Texture2D" uid="uid://chs10ahlyaf8q" path="res://Spritesheet/waterfall.png" id="2_ehrq2"]
 [ext_resource type="Texture2D" uid="uid://dt6gwhv31wkjf" path="res://Spritesheet/blue_bullet.png" id="3_682iq"]
+[ext_resource type="AudioStream" uid="uid://bhhcfqg65qsru" path="res://Music and sounds/railgun_se.mp3" id="4_wpatt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l63sv"]
 size = Vector2(103, 636.5)
@@ -68,7 +69,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_0oxan"]
 radius = 20.0
 
-[node name="Railgun" type="Area2D" groups=["player_fire", "railgun"]]
+[node name="Railgun" type="Area2D" groups=["railgun"]]
 script = ExtResource("1_gvouq")
 
 [node name="Full_shot" type="CollisionShape2D" parent="."]
@@ -82,9 +83,12 @@ rotation = 3.14159
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_12boh")
 animation = &"Start"
-frame_progress = 0.505807
+frame_progress = 0.431135
 
 [node name="Start_shape" type="CollisionShape2D" parent="."]
 position = Vector2(0, -42)
 scale = Vector2(0.3, 0.3)
 shape = SubResource("CircleShape2D_0oxan")
+
+[node name="Rail_se" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_wpatt")

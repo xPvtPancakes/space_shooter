@@ -1,12 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://cbg551gcxxdqy"]
+[gd_scene load_steps=15 format=3 uid="uid://cbg551gcxxdqy"]
 
 [ext_resource type="Script" path="res://Scripts/green_enemy.gd" id="1_4jimc"]
 [ext_resource type="PackedScene" uid="uid://c03ry3wb554tu" path="res://Scenes/enemy_fire.tscn" id="2_guihf"]
 [ext_resource type="AudioStream" uid="uid://clg8o8mio2s5p" path="res://Music and sounds/laser-14792.mp3" id="4_b8034"]
 [ext_resource type="Texture2D" uid="uid://ds10h8txjsjpu" path="res://Spritesheet/blue_enemy.png" id="5_36hjj"]
 [ext_resource type="AudioStream" uid="uid://xe8oiweqgywc" path="res://Music and sounds/explosion.mp3" id="5_hbl5w"]
+[ext_resource type="Texture2D" uid="uid://d5gh54u6vmhl" path="res://Spritesheet/Explosion/explosion00.png" id="6_f6u6q"]
 [ext_resource type="Texture2D" uid="uid://bqqob2ob222mh" path="res://Spritesheet/green_enemy.png" id="6_qn7re"]
+[ext_resource type="Texture2D" uid="uid://dsyn1o6j85u5i" path="res://Spritesheet/Explosion/explosion03.png" id="7_2nfhw"]
 [ext_resource type="Texture2D" uid="uid://dovyib0tm32sc" path="res://Spritesheet/orange_enemy.png" id="7_326ix"]
+[ext_resource type="Texture2D" uid="uid://cjcf2t0ik0oan" path="res://Spritesheet/Explosion/explosion01.png" id="8_wowxr"]
+[ext_resource type="Texture2D" uid="uid://chxr6lrfwsacu" path="res://Spritesheet/Explosion/explosion08.png" id="9_xfdn2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nd0co"]
 atlas = ExtResource("5_36hjj")
@@ -25,6 +29,23 @@ animations = [{
 "loop": true,
 "name": &"blue",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_f6u6q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2nfhw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_wowxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_xfdn2")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -56,9 +77,11 @@ position = Vector2(-1.4, 53.2)
 
 [node name="Guns2" type="Marker2D" parent="."]
 position = Vector2(-1.4, 53.2)
+rotation = 0.261799
 
 [node name="Guns3" type="Marker2D" parent="."]
 position = Vector2(-1.4, 53.2)
+rotation = -0.261799
 
 [node name="ShootTimer" type="Timer" parent="."]
 
@@ -89,3 +112,4 @@ animation = &"green"
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="finished" from="Explosion_SE" to="." method="_on_explosion_se_finished"]
+[connection signal="animation_finished" from="EnemyType" to="." method="_on_enemy_type_animation_finished"]

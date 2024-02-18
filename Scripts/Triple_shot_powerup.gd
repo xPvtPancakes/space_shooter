@@ -20,6 +20,5 @@ func powerup():
 
 
 func _on_ts_area_area_entered(area):
-	print(area.name)
-	if area.is_in_group("player"):
+	if area.is_in_group("player") or area.is_in_group("player_fire"):
 		powerup()

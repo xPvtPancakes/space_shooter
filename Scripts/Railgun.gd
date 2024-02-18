@@ -4,12 +4,9 @@ extends Area2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$AnimatedSprite2D.play("Start")
+	$Rail_se.play()
 	expand()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func expand():
 	for i in 5:

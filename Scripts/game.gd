@@ -4,9 +4,11 @@ extends Node2D
 var enemy = preload("res://Scenes/green_enemy.tscn")
 var tri_shot = preload("res://Scenes/triple_shot_powerup.tscn")
 var first_boss = preload("res://Scenes/1stBoss.tscn")
+var comet = preload("res://Scenes/comet.tscn")
 var high_score
 var SaveFile = ("user://scoresave.tres")
 var score = 0
+var score_for_life = 0
 signal hp_change
 var rng = RandomNumberGenerator.new()
 var kill_counter = 0
@@ -73,6 +75,7 @@ func loadscores():
 
 func _on_score_up(adj_score):
 	score += adj_score
+	score_for_life += adj_score
 	$Score_label.text = str(score)
 	
 	kill_counter += 1
@@ -91,6 +94,10 @@ func _on_score_up(adj_score):
 	if kills_without_death >= 20:
 		kills_without_death = 0
 		PlayerVariables.emit_signal("rail_charges", 1)
+	
+	if score_for_life > 5000:
+		PlayerVariables.health += 1
+		score_for_life = 0
 	
 	if score > 5000 && boss_flag_1 == 0:
 		boss_flag_1 = 1
@@ -120,14 +127,14 @@ func Game_over():
 	$RestartButton.set_deferred("visible", true)
 	$RestartButton.set_deferred("disabled", false)
 	for i in get_tree().get_nodes_in_group("enemy"):
-		remove_child(i)
-	for i in get_tree().get_nodes_in_group("Enemy_fire"):
-		remove_child(i)
+		i.queue_free()
+
 	
 
 func _on_start_timer_timeout(): #start game
 	$EnemyTimer.wait_time = randf_range(rand_range_x,rand_range_y)
 	$EnemyTimer.start()
+	$CometTimer.start()
 
 	
 
@@ -144,6 +151,30 @@ func Spawn_boss():
 		path.progress_ratio = 0
 		boss_spawn.remove_child(boss_instance)
 		path.add_child(boss_instance)
+
+func spawn_comet():
+	var comet_instance = comet.instantiate()
+	var rand_num = rng.randf_range(0, 30)
+	var x_rand_num = rng.randf_range(20, get_viewport_rect().size.x)
+	var y_rand_num = rng.randf_range(0, get_viewport_rect().size.y/2)
+	var comet_spawn_location = Vector2(0, 0)
+	if rand_num <= 10:
+		comet_spawn_location.x = 0
+		comet_spawn_location.y = y_rand_num
+		comet_instance.pos(1)
+	if rand_num >= 10 && rand_num < 20:
+		comet_spawn_location.x = 0
+		comet_spawn_location.y = x_rand_num
+		comet_instance.pos(1)
+
+	else:
+		comet_spawn_location.x = get_viewport_rect().size.x
+		comet_spawn_location.y = y_rand_num
+		comet_instance.pos(-1)
+
+	comet_instance.position = comet_spawn_location
+	add_child(comet_instance)
+	
 
 func _process(delta): #refresh every frame
 	path.progress += delta * 200 
@@ -183,17 +214,31 @@ func spawn_enemy():
 	e.position = enemy_spawn_location
 	add_child(e)
 	e.start(enemy_spawn_location)
+
 	$EnemyTimer.wait_time = randf_range(rand_range_x,rand_range_y)
 
 
 
 func _on_restart_button_pressed():
 	get_tree().reload_current_scene()
+	PlayerVariables.health = 3
 
 func _on_first_boss_defeat():
 	$EndOfDemo.set_deferred("visible", true)
+	$EndGame.set_deferred("visible", true)
+	$EndGame.set_deferred("disabled", false)
 
 
 func _on_line_edit_text_submitted(name_entered):
 	#Update_Highscores(name_entered)
 	pass
+
+
+func _on_end_game_pressed():
+	if score > high_score:
+		save(score)
+	get_tree().quit()
+
+
+func _on_comet_timer_timeout():
+	spawn_comet()

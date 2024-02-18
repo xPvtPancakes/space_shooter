@@ -35,8 +35,10 @@ func railgun():
 		PlayerVariables.railcharge -= 1
 		add_child(b)
 		b.transform = $Guns.transform
+		can_shoot = false
 		await(get_tree().create_timer(3).timeout)
 		remove_child(b)
+		can_shoot = true
 
 
 func _on_Rail_increase(increase):

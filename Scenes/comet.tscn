@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://bywxeg1snwtkt"]
+
+[ext_resource type="Script" path="res://Scripts/comet.gd" id="1_2pmli"]
+[ext_resource type="Texture2D" uid="uid://2cgqb0uqikn4" path="res://Spritesheet/comets 1.png" id="1_28h8y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4basp"]
+atlas = ExtResource("1_28h8y")
+region = Rect2(0, 2, 120, 97)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lo41a"]
+atlas = ExtResource("1_28h8y")
+region = Rect2(0, 99, 120, 97)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f6wbv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4basp")
+}],
+"loop": true,
+"name": &"Brown",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lo41a")
+}],
+"loop": true,
+"name": &"Gray",
+"speed": 5.0
+}]
+
+[node name="Comet" type="Area2D" groups=["comet"]]
+script = ExtResource("1_2pmli")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." groups=["comet"]]
+polygon = PackedVector2Array(9, -48, 60, -30, 47, 19, -8, 33, -26, 49, -55, 26, -60, -6, -39, -42)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_f6wbv")
+animation = &"Brown"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

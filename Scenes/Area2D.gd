@@ -39,7 +39,7 @@ func _on_boss_explosion_sprite_animation_finished():
 
 
 func _on_area_entered(area):
-	if area.is_in_group("enemy"):
+	if area.is_in_group("enemy") or area.is_in_group("comet"):
 		$Explosion_SE.play()
 		speed = 0
 		$Sheet.set_deferred("visible", false)
