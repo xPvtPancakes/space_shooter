@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dwfhd5do06amr"]
+[gd_scene load_steps=11 format=3 uid="uid://dwfhd5do06amr"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_v63fr"]
 [ext_resource type="PackedScene" uid="uid://cjbekul01iach" path="res://Scenes/blue_ship.tscn" id="2_g10mx"]
@@ -20,6 +20,12 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 497, -340, 0, 0, 0, 0, 494, -183, 0, 0, 0, 0, 509, -26)
 }
 point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_hn2cc"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 382, -28, 0, 0, 0, 0, 388, 26, 0, 0, 0, 0, 398, 90, 0, 0, 0, 0, 416, 140, 0, 0, 0, 0, 447, 179, 0, 0, 0, 0, 480, 210, 0, 0, 0, 0, 511, 208, 0, 0, 0, 0, 541, 194, 0, 0, 0, 0, 537, 170, 0, 0, 0, 0, 515, 146, 0, 0, 0, 0, 488, 146, 0, 0, 0, 0, 474, 166, 0, 0, 0, 0, 457, 218, 0, 0, 0, 0, 453, 245, 0, 0, 0, 0, 457, 302, 0, 0, 0, 0, 502, 695)
+}
+point_count = 16
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_v63fr")
@@ -193,10 +199,17 @@ curve = SubResource("Curve2D_myq0v")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="SpawnPath"]
 position = Vector2(497, -340)
-rotates = false
-loop = false
+rotation = 1.5899
 
 [node name="LifeUp_se" type="AudioStreamPlayer" parent="."]
+
+[node name="EnemyPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_hn2cc")
+
+[node name="EnemyPath2D" type="PathFollow2D" parent="EnemyPath"]
+position = Vector2(382, -28)
+rotation = 1.46014
+loop = false
 
 [connection signal="pressed" from="EndGame" to="." method="_on_end_game_pressed"]
 [connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]

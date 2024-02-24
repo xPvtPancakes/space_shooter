@@ -14,8 +14,9 @@ var type_from_main
 func start(_pos):
 	#speed = 200
 
-	await get_tree().create_timer(randf_range(0.25, 0.55)).timeout
 
+	$StartTimer.wait_time = randf_range(0.25, 0.55)
+	await $StartTimer.timeout
 	$MoveTimer.wait_time = randf_range(5, 20)
 	$MoveTimer.start()
 	$ShootTimer.wait_time = randf_range(1, 3)

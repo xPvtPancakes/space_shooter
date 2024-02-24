@@ -17,6 +17,7 @@ var kills_without_death = 0
 var rand_range_x = 0.2
 var rand_range_y = 3
 var boss_flag_1 = 0
+@onready var LoopPath = $EnemyPath/EnemyPath2D
 @onready var path = $BossFight/PathFollow2D
 @onready var boss_spawn = $SpawnPath/PathFollow2D
 
@@ -45,33 +46,7 @@ func loadscores():
 		high_score = content
 		$HighScoreLabel.text = str(content)
 
-#func Update_Highscores(player_name):
-	#var name = player_name
-	#high_score[name] = score
-	#
-	#while high_score.size() > 10:
-		#var lowest_value = 100
-		#for entry in high_score:
-			#if high_score[entry] < lowest_value:
-				#lowest_value = high_score[entry]
-		#
-		#for logged in high_score:
-			#if high_score[logged] == lowest_value:
-				#high_score.erase(logged)
-	#order_highscores(high_score)
-	#SaveData.save_game()
-	#
-#func order_highscores(scores: Dictionary) -> Dictionary:
-	#var original_dict: Dictionary = high_score.duplicate()
-	#var ordered_dict: Dictionary
-	#for i in original_dict.size():
-		#var highest_score: int = 0
-		#for entry in original_dict:
-			#if original_dict[entry] > highest_score:
-				#highest_score = original_dict[entry]
-			#ordered_dict[original_dict.find_key(highest_score)] = highest_score
-			#original_dict.erase(original_dict.find_key(highest_score))
-	#return ordered_dict
+
 
 func _on_score_up(adj_score):
 	score += adj_score
@@ -180,8 +155,11 @@ func spawn_comet():
 func _process(delta): #refresh every frame
 	path.progress += delta * 200 
 	boss_spawn.progress += delta * 200
+	LoopPath.progress += delta * 200
 	$RailCharges2.text = str(PlayerVariables.railcharge)
 	$Lives_label.text = ": " + str(PlayerVariables.health)
+	print(LoopPath.progress_ratio)
+	
 
 
 
@@ -203,17 +181,20 @@ func spawn_enemy():
 	var y_rand_num = rng.randf_range(20, 300)
 	var enemy_spawn_location = Vector2(0, 0)
 	var e = enemy.instantiate()
-	if rand_num >= 0:
-		enemy_spawn_location.x = 0
-		enemy_spawn_location.y = y_rand_num
-
-	else:
-		enemy_spawn_location.x = get_viewport_rect().size.x
-		enemy_spawn_location.y = y_rand_num
+	#if rand_num >= 0:
+		#enemy_spawn_location.x = 0
+		#enemy_spawn_location.y = y_rand_num
+#
+	#else:
+		#enemy_spawn_location.x = get_viewport_rect().size.x
+		#enemy_spawn_location.y = y_rand_num
 	e.set_type(enemy_type) #0: green enemy, 1: orange, 2: blue
-
-	e.position = enemy_spawn_location
-	add_child(e)
+	
+	LoopPath.progress_ratio = 0
+	LoopPath.set_deferred("add_child", e)
+	
+	#e.position = enemy_spawn_location
+	#add_child(e)
 	e.start(enemy_spawn_location)
 
 	$EnemyTimer.wait_time = randf_range(rand_range_x,rand_range_y)
@@ -243,3 +224,31 @@ func _on_end_game_pressed():
 
 func _on_comet_timer_timeout():
 	spawn_comet()
+
+#func Update_Highscores(player_name):
+	#var name = player_name
+	#high_score[name] = score
+	#
+	#while high_score.size() > 10:
+		#var lowest_value = 100
+		#for entry in high_score:
+			#if high_score[entry] < lowest_value:
+				#lowest_value = high_score[entry]
+		#
+		#for logged in high_score:
+			#if high_score[logged] == lowest_value:
+				#high_score.erase(logged)
+	#order_highscores(high_score)
+	#SaveData.save_game()
+	#
+#func order_highscores(scores: Dictionary) -> Dictionary:
+	#var original_dict: Dictionary = high_score.duplicate()
+	#var ordered_dict: Dictionary
+	#for i in original_dict.size():
+		#var highest_score: int = 0
+		#for entry in original_dict:
+			#if original_dict[entry] > highest_score:
+				#highest_score = original_dict[entry]
+			#ordered_dict[original_dict.find_key(highest_score)] = highest_score
+			#original_dict.erase(original_dict.find_key(highest_score))
+	#return ordered_dict
