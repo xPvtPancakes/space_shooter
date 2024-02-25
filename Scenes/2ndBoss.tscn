@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=3 uid="uid://diikavropjiyn"]
+
+[ext_resource type="Texture2D" uid="uid://uqmn8wbm41si" path="res://Spritesheet/WET-BRUSH-DETANGLER-OVAL-SIDE-600x595.png" id="1_0o2dq"]
+[ext_resource type="Script" path="res://Scripts/2ndBoss.gd" id="1_mttp8"]
+[ext_resource type="PackedScene" uid="uid://c03ry3wb554tu" path="res://Scenes/enemy_fire.tscn" id="2_gc37g"]
+[ext_resource type="Texture2D" uid="uid://bwltjciclrfso" path="res://Spritesheet/EnemyCharge.png" id="4_cw3es"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p2uxm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_0o2dq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Boss2" type="Area2D"]
+script = ExtResource("1_mttp8")
+enemy_fire = ExtResource("2_gc37g")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_p2uxm")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(8, -22, 41, -20, 134, -21, 145, -20, 146, -14, 137, -12, 94, -10, 7, -9, 16, 14, 3, 19, -27, 25, -61, 27, -98, 24, -125, 20, -144, 12, -132, -8, -144, -8, -146, -14, -142, -19, -69, -24)
+
+[node name="Guns1" type="Marker2D" parent="."]
+position = Vector2(-93, 25)
+rotation = 0.143117
+
+[node name="Guns2" type="Marker2D" parent="."]
+position = Vector2(9, 17)
+rotation = -0.287979
+
+[node name="Guns3" type="Marker2D" parent="."]
+position = Vector2(-5, 21)
+rotation = -0.287979
+
+[node name="Guns4" type="Marker2D" parent="."]
+position = Vector2(-18, 23)
+rotation = -0.0715585
+
+[node name="Guns5" type="Marker2D" parent="."]
+position = Vector2(-31, 26)
+rotation = -0.0715585
+
+[node name="Guns6" type="Marker2D" parent="."]
+position = Vector2(-53, 26)
+
+[node name="Guns7" type="Marker2D" parent="."]
+position = Vector2(-67, 25)
+
+[node name="Guns8" type="Marker2D" parent="."]
+position = Vector2(-80, 26)
+
+[node name="Guns9" type="Marker2D" parent="."]
+position = Vector2(-116, 22)
+rotation = 0.216421
+
+[node name="Guns10" type="Marker2D" parent="."]
+position = Vector2(-133, 18)
+rotation = 0.431096
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="EnemyCharge" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-117, 48)
+texture = ExtResource("4_cw3es")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

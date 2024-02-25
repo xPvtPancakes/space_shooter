@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dwfhd5do06amr"]
+[gd_scene load_steps=12 format=3 uid="uid://dwfhd5do06amr"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_v63fr"]
 [ext_resource type="PackedScene" uid="uid://cjbekul01iach" path="res://Scenes/blue_ship.tscn" id="2_g10mx"]
@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://dx54b7ql4q8lc" path="res://Kenney Blocks.ttf" id="6_00de0"]
 [ext_resource type="AudioStream" uid="uid://bddvxysad18ad" path="res://Music and sounds/Main Theme - Star Fox 64 [64] - Super Smash Bros. Ultimate.mp3" id="6_ohcbt"]
 [ext_resource type="Texture2D" uid="uid://cnep1umono3ew" path="res://Spritesheet/sheet.png" id="6_uittp"]
+[ext_resource type="PackedScene" uid="uid://diikavropjiyn" path="res://Scenes/2ndBoss.tscn" id="7_ghxog"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kea5m"]
 
@@ -204,12 +205,18 @@ rotation = 1.5899
 [node name="LifeUp_se" type="AudioStreamPlayer" parent="."]
 
 [node name="EnemyPath" type="Path2D" parent="."]
+position = Vector2(0, -67.2891)
+scale = Vector2(1, 1.09682)
 curve = SubResource("Curve2D_hn2cc")
 
 [node name="EnemyPath2D" type="PathFollow2D" parent="EnemyPath"]
 position = Vector2(382, -28)
 rotation = 1.46014
 loop = false
+
+[node name="Boss2" parent="." instance=ExtResource("7_ghxog")]
+position = Vector2(569, 82)
+scale = Vector2(3.5, 3.5)
 
 [connection signal="pressed" from="EndGame" to="." method="_on_end_game_pressed"]
 [connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]

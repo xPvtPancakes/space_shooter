@@ -109,8 +109,9 @@ func Game_over():
 
 func _on_start_timer_timeout(): #start game
 	$EnemyTimer.wait_time = randf_range(rand_range_x,rand_range_y)
-	$EnemyTimer.start()
+	#$EnemyTimer.start()
 	$CometTimer.start()
+	#spawn_enemy()
 
 	
 
@@ -158,7 +159,7 @@ func _process(delta): #refresh every frame
 	LoopPath.progress += delta * 200
 	$RailCharges2.text = str(PlayerVariables.railcharge)
 	$Lives_label.text = ": " + str(PlayerVariables.health)
-	print(LoopPath.progress_ratio)
+
 	
 
 
@@ -181,20 +182,22 @@ func spawn_enemy():
 	var y_rand_num = rng.randf_range(20, 300)
 	var enemy_spawn_location = Vector2(0, 0)
 	var e = enemy.instantiate()
-	#if rand_num >= 0:
-		#enemy_spawn_location.x = 0
-		#enemy_spawn_location.y = y_rand_num
-#
-	#else:
-		#enemy_spawn_location.x = get_viewport_rect().size.x
-		#enemy_spawn_location.y = y_rand_num
+	if rand_num >= 0:
+		enemy_spawn_location.x = 0
+		enemy_spawn_location.y = y_rand_num
+
+	else:
+		enemy_spawn_location.x = get_viewport_rect().size.x
+		enemy_spawn_location.y = y_rand_num
 	e.set_type(enemy_type) #0: green enemy, 1: orange, 2: blue
+	#e.speed = 0
+	#e.position = Vector2(500, 50)
+	#LoopPath.progress_ratio = 0
+	#LoopPath.call_deferred("add_child", e)
 	
-	LoopPath.progress_ratio = 0
-	LoopPath.set_deferred("add_child", e)
 	
-	#e.position = enemy_spawn_location
-	#add_child(e)
+	e.position = enemy_spawn_location
+	add_child(e)
 	e.start(enemy_spawn_location)
 
 	$EnemyTimer.wait_time = randf_range(rand_range_x,rand_range_y)
