@@ -109,3 +109,10 @@ func _on_TS_signal(TSFlag):
 
 func _on_explosion_se_finished():
 	queue_free()
+
+
+
+
+func _on_player_diameter_area_entered(area):
+	if area.is_in_group("boss"):
+		PlayerVariables.emit_signal("player_damage", -1)
