@@ -4,6 +4,7 @@ extends Node2D
 var enemy = preload("res://Scenes/green_enemy.tscn")
 var tri_shot = preload("res://Scenes/triple_shot_powerup.tscn")
 var first_boss = preload("res://Scenes/1stBoss.tscn")
+var second_boss = preload("res://Scenes/2ndBoss.tscn")
 var comet = preload("res://Scenes/comet.tscn")
 var high_score
 var SaveFile = ("user://scoresave.tres")
@@ -17,9 +18,11 @@ var kills_without_death = 0
 var rand_range_x = 0.2
 var rand_range_y = 3
 var boss_flag_1 = 0
+var boss_flag_2 = 0
 @onready var LoopPath = $EnemyPath/EnemyPath2D
 @onready var path = $BossFight/PathFollow2D
 @onready var boss_spawn = $SpawnPath/PathFollow2D
+@onready var boss_spawn2 = $SpawnPath2/PathFollow2D
 
 
 func _ready():
@@ -27,6 +30,7 @@ func _ready():
 	PlayerVariables.connect("score_up", _on_score_up)
 	PlayerVariables.connect("player_health", _on_health_change)
 	PlayerVariables.connect("first_boss", _on_first_boss_defeat)
+	PlayerVariables.connect("second_boss", _on_second_boss_defeat)
 	#PlayerVariables.connect("rail_charges", _on_Rail_shot)
 	$RailCharges2.text = str(PlayerVariables.railcharge)
 	$Lives_label.text = ": " + str(PlayerVariables.health)
@@ -77,8 +81,10 @@ func _on_score_up(adj_score):
 	
 	if score > 5000 && boss_flag_1 == 0:
 		boss_flag_1 = 1
-		Spawn_boss()
-		$EnemyTimer.stop()
+		Spawn_boss1()
+		$EnemyTimer.paused = true
+		
+	
 
 
 
@@ -111,23 +117,32 @@ func _on_start_timer_timeout(): #start game
 	$EnemyTimer.wait_time = randf_range(rand_range_x,rand_range_y)
 	#$EnemyTimer.start()
 	$CometTimer.start()
-	#spawn_enemy()
+	Spawn_boss1()
 
 	
 
 
 
 
-func Spawn_boss():
+func Spawn_boss1():
 	var boss_instance = first_boss.instantiate()
 	boss_spawn.progress_ratio = 0
+	boss_instance.rotation = -PI/2
 	boss_spawn.call_deferred("add_child", boss_instance)
 
 	await(get_tree().create_timer(3).timeout)
 	if boss_spawn.progress_ratio > 0.99:
 		path.progress_ratio = 0
 		boss_spawn.remove_child(boss_instance)
+		boss_instance.rotation = 0
 		path.add_child(boss_instance)
+		
+func Spawn_boss2():
+	var boss_instance = second_boss.instantiate()
+	boss_instance.scale = Vector2(3.5, 3.5)
+	boss_instance.rotation = -PI/2
+	boss_spawn2.progress_ratio = 0
+	boss_spawn2.call_deferred("add_child", boss_instance)
 
 func spawn_comet():
 	var comet_instance = comet.instantiate()
@@ -156,6 +171,7 @@ func spawn_comet():
 func _process(delta): #refresh every frame
 	path.progress += delta * 200 
 	boss_spawn.progress += delta * 200
+	boss_spawn2.progress += delta * 200
 	LoopPath.progress += delta * 200
 	$RailCharges2.text = str(PlayerVariables.railcharge)
 	$Lives_label.text = ": " + str(PlayerVariables.health)
@@ -209,10 +225,13 @@ func _on_restart_button_pressed():
 	PlayerVariables.health = 3
 
 func _on_first_boss_defeat():
-	$EndOfDemo.set_deferred("visible", true)
-	$EndGame.set_deferred("visible", true)
-	$EndGame.set_deferred("disabled", false)
+	#$EndOfDemo.set_deferred("visible", true)
+	#$EndGame.set_deferred("visible", true)
+	#$EndGame.set_deferred("disabled", false)
+	$EnemyTimer.paused = false
 
+func _on_second_boss_defeat():
+	$EnemyTimer.paused = false
 
 func _on_line_edit_text_submitted(name_entered):
 	#Update_Highscores(name_entered)

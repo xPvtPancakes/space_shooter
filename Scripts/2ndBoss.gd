@@ -1,10 +1,12 @@
 extends Area2D
 
-var hp = 12
+var hp = 10
 var damage_taken = 0
 @export var enemy_fire : PackedScene
 var charge_sprite = load("res://Scenes/charge_sprite.tscn")
+
 var phase2 = 0
+
 @onready var guns = [
 	$Guns1,
 	$Guns2,
@@ -33,9 +35,10 @@ func shooting():
 	var b = enemy_fire.instantiate()
 	var sprite = charge_sprite.instantiate()
 	var n = floor(rng.randf_range(0, 10))
+	b.speed = 200
 	get_tree().root.add_child(b)
 	sprite.position = guns[n].global_position
-	print(sprite.position)
+	
 	get_tree().root.add_child(sprite)
 	
 	#sprite.set_deferred("visible", true)
@@ -45,26 +48,53 @@ func shooting():
 
 
 func _on_timer_timeout():
+
 	for i in damage_taken:
-		#shooting()
+		shooting()
 		await get_tree().create_timer(0.5).timeout
 
 func _on_area_entered(area):
-	if area.is_in_group("player_fire"):
-		hp -= 1
-		damage_taken += 1
-		swing()
-		
+	if area.is_in_group("player_fire") and $Invul_timer.time_left == 0:
+		health_loss()
+		if damage_taken >= 5:
+			phase2 = 1
+			swing()
+
+func health_loss():
+	hp -= 1
+	damage_taken += 1
+	$Invul_timer.start()
+	if hp <= 0:
+		PlayerVariables.emit_signal("second_boss")
+		PlayerVariables.emit_signal("score_up", 10000)
+		for i in get_tree().get_nodes_in_group("sprite"):
+			i.queue_free()
+		queue_free()
+	
 func swing():
 	for i in 6:
 		$AnimatedSprite2D.rotate(PI/18)
 		$CollisionPolygon2D.rotate(PI/18)
 		await(get_tree().create_timer(0.05).timeout)
-	for i in 18:
+	for i in 20:
+		$Whoosh_SE.play()
 		$AnimatedSprite2D.rotate(-PI/18)
 		$CollisionPolygon2D.rotate(-PI/18)
 		await(get_tree().create_timer(0.03).timeout)
-	for i in 12:
+	for i in 14:
 		$AnimatedSprite2D.rotate(PI/18)
 		$CollisionPolygon2D.rotate(PI/18)
 		await(get_tree().create_timer(0.03).timeout)
+		
+		
+#var can_shoot
+#var enemy_rail = load("res://Scenes/Enemy_Railgun.tscn")
+#func railgun():			#use this for 3rd boss
+	#if get_tree().get_nodes_in_group("enemy_rail").is_empty():
+		#var b = enemy_rail.instantiate()
+		#add_child(b)
+		#b.transform = $Rail.transform
+		#can_shoot = false
+		#await(get_tree().create_timer(3).timeout)
+		#remove_child(b)
+		#can_shoot = true

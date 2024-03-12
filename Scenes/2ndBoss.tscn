@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://diikavropjiyn"]
+[gd_scene load_steps=6 format=3 uid="uid://diikavropjiyn"]
 
 [ext_resource type="Texture2D" uid="uid://uqmn8wbm41si" path="res://Spritesheet/WET-BRUSH-DETANGLER-OVAL-SIDE-600x595.png" id="1_0o2dq"]
 [ext_resource type="Script" path="res://Scripts/2ndBoss.gd" id="1_mttp8"]
 [ext_resource type="PackedScene" uid="uid://c03ry3wb554tu" path="res://Scenes/enemy_fire.tscn" id="2_gc37g"]
+[ext_resource type="AudioStream" uid="uid://drs8ntjerp8t7" path="res://Music and sounds/whoosh-6316.mp3" id="4_im1xq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p2uxm"]
 animations = [{
@@ -30,13 +31,16 @@ polygon = PackedVector2Array(8, -22, 41, -20, 134, -21, 145, -20, 146, -14, 137,
 position = Vector2(-93, 25)
 rotation = 0.143117
 
+[node name="Rail" type="Marker2D" parent="."]
+position = Vector2(86, -4.99999)
+
 [node name="Guns2" type="Marker2D" parent="."]
 position = Vector2(9, 17)
-rotation = -0.287979
+rotation = -0.575959
 
 [node name="Guns3" type="Marker2D" parent="."]
 position = Vector2(-5, 21)
-rotation = -0.287979
+rotation = -0.431096
 
 [node name="Guns4" type="Marker2D" parent="."]
 position = Vector2(-18, 23)
@@ -60,11 +64,18 @@ position = Vector2(-116, 22)
 rotation = 0.216421
 
 [node name="Guns10" type="Marker2D" parent="."]
-position = Vector2(-133, 18)
-rotation = 0.431096
+position = Vector2(-41, 26)
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
 autostart = true
+
+[node name="Invul_timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Whoosh_SE" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_im1xq")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

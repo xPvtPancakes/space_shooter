@@ -5,6 +5,7 @@ signal score_up(score)
 signal player_health()
 signal triple_shot(flag)
 signal first_boss()
+signal second_boss()
 signal rail_charges(change)
 var railcharge = 0
 var health = 3

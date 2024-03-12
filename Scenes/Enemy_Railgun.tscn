@@ -1,0 +1,93 @@
+[gd_scene load_steps=14 format=3 uid="uid://bro2ye1htbf8q"]
+
+[ext_resource type="Script" path="res://Scripts/Railgun.gd" id="1_hw7cl"]
+[ext_resource type="Texture2D" uid="uid://uconodonmow2" path="res://Spritesheet/enemy_rail.png" id="2_v3v83"]
+[ext_resource type="Texture2D" uid="uid://bdm4hdb7wluej" path="res://Spritesheet/enemy_charge.png" id="3_38omi"]
+[ext_resource type="AudioStream" uid="uid://bhhcfqg65qsru" path="res://Music and sounds/railgun_se.mp3" id="4_ngfhn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l63sv"]
+size = Vector2(103, 636.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_be26l"]
+atlas = ExtResource("2_v3v83")
+region = Rect2(0, 0, 36, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nxtfx"]
+atlas = ExtResource("2_v3v83")
+region = Rect2(36, 0, 36, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_833ih"]
+atlas = ExtResource("2_v3v83")
+region = Rect2(72, 0, 36, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8d0hs"]
+atlas = ExtResource("2_v3v83")
+region = Rect2(108, 0, 36, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfmwr"]
+atlas = ExtResource("2_v3v83")
+region = Rect2(144, 0, 36, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtu57"]
+atlas = ExtResource("2_v3v83")
+region = Rect2(180, 0, 36, 63)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_12boh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_be26l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nxtfx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_833ih")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8d0hs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gfmwr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vtu57")
+}],
+"loop": true,
+"name": &"Laser",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_38omi")
+}],
+"loop": true,
+"name": &"Start",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0oxan"]
+radius = 20.0
+
+[node name="Railgun" type="Area2D" groups=["Enemy_fire"]]
+script = ExtResource("1_hw7cl")
+
+[node name="Full_shot" type="CollisionShape2D" parent="."]
+position = Vector2(0, 317.25)
+shape = SubResource("RectangleShape2D_l63sv")
+disabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 43)
+rotation = 3.14159
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_12boh")
+animation = &"Laser"
+
+[node name="Start_shape" type="CollisionShape2D" parent="." groups=["enemy_rail"]]
+position = Vector2(0, 42)
+scale = Vector2(0.3, 0.3)
+shape = SubResource("CircleShape2D_0oxan")
+
+[node name="Rail_se" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ngfhn")
