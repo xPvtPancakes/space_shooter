@@ -4,7 +4,7 @@ extends CharacterBody2D
 #var start_position = Vector2.ZERO
 var speed = 200
 var hp = 1
-var score = 20
+var score = 50
 
 @onready var screensize = get_viewport_rect().size
 
@@ -29,12 +29,12 @@ func set_type(type_value):
 	if type_from_main >= 1 && type_from_main <= 2:
 		$EnemyType.play("orange")
 		hp = 2
-		score = 50
+		score = 100
 		speed = 300
 	if type_from_main >= 2:
 		$EnemyType.play("blue")
 		hp = 3
-		score = 100
+		score = 200
 		speed = 400
 
 	

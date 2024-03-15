@@ -16,7 +16,7 @@ func expand():
 	await(get_tree().create_timer(0.5).timeout)
 	$AnimatedSprite2D.play("Laser")
 	$AnimatedSprite2D.scale = Vector2(2.823, 10.1)
-	$AnimatedSprite2D.position = Vector2(0, 318)
+	$AnimatedSprite2D.position = Vector2(0, -318)
 	$Full_shot.set_deferred("disabled", false)
 	#for i in 10:
 		#$AnimatedSprite2D.scale += Vector2(0,0.5)

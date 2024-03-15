@@ -22,7 +22,8 @@ SaveData="*res://Scripts/SaveData.gd"
 
 [display]
 
-window/size/resizable=false
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [dotnet]
 

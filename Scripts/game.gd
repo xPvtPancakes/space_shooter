@@ -32,7 +32,7 @@ func _ready():
 	PlayerVariables.connect("first_boss", _on_first_boss_defeat)
 	PlayerVariables.connect("second_boss", _on_second_boss_defeat)
 	#PlayerVariables.connect("rail_charges", _on_Rail_shot)
-	$RailCharges2.text = str(PlayerVariables.railcharge)
+	$Control/RailCharges2.text = str(PlayerVariables.railcharge)
 	$Lives_label.text = ": " + str(PlayerVariables.health)
 	New_game()
 
@@ -84,6 +84,11 @@ func _on_score_up(adj_score):
 		Spawn_boss1()
 		$EnemyTimer.paused = true
 		
+	if score > 20000 && boss_flag_1 == 1 && boss_flag_2 == 0:
+		boss_flag_2 = 1
+		Spawn_boss2()
+		$EnemyTimer.paused = true
+		
 	
 
 
@@ -117,7 +122,7 @@ func _on_start_timer_timeout(): #start game
 	$EnemyTimer.wait_time = randf_range(rand_range_x,rand_range_y)
 	#$EnemyTimer.start()
 	$CometTimer.start()
-	Spawn_boss1()
+	#expand_viewport()
 
 	
 
@@ -173,7 +178,7 @@ func _process(delta): #refresh every frame
 	boss_spawn.progress += delta * 200
 	boss_spawn2.progress += delta * 200
 	LoopPath.progress += delta * 200
-	$RailCharges2.text = str(PlayerVariables.railcharge)
+	$Control/RailCharges2.text = str(PlayerVariables.railcharge)
 	$Lives_label.text = ": " + str(PlayerVariables.health)
 
 	
@@ -194,7 +199,7 @@ func _on_enemy_timer_timeout(): #spawn enemies
 	
 func spawn_enemy():
 	var rand_num = rng.randf_range(-10, 10)
-	var enemy_type = (kill_count_reset / rng.randf_range(1, 3))
+	var enemy_type = (kill_count_reset * (boss_flag_1+boss_flag_2) / rng.randf_range(2, 10))
 	var y_rand_num = rng.randf_range(20, 300)
 	var enemy_spawn_location = Vector2(0, 0)
 	var e = enemy.instantiate()
@@ -206,11 +211,7 @@ func spawn_enemy():
 		enemy_spawn_location.x = get_viewport_rect().size.x
 		enemy_spawn_location.y = y_rand_num
 	e.set_type(enemy_type) #0: green enemy, 1: orange, 2: blue
-	#e.speed = 0
-	#e.position = Vector2(500, 50)
-	#LoopPath.progress_ratio = 0
-	#LoopPath.call_deferred("add_child", e)
-	
+
 	
 	e.position = enemy_spawn_location
 	add_child(e)
@@ -218,7 +219,8 @@ func spawn_enemy():
 
 	$EnemyTimer.wait_time = randf_range(rand_range_x,rand_range_y)
 
-
+	
+	
 
 func _on_restart_button_pressed():
 	get_tree().reload_current_scene()
@@ -246,6 +248,13 @@ func _on_end_game_pressed():
 
 func _on_comet_timer_timeout():
 	spawn_comet()
+
+func expand_viewport():
+	var y = get_viewport_rect().size.y
+	for i in 500:
+		y += 1
+		DisplayServer.window_set_size(Vector2i(1152,y))
+		await(get_tree().create_timer(0.005).timeout)
 
 #func Update_Highscores(player_name):
 	#var name = player_name

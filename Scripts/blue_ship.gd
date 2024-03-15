@@ -57,6 +57,9 @@ func shooting():
 		var b3 = blue_bullet.instantiate()
 		owner.add_child(b3)
 		b3.transform = $Guns3.global_transform
+		can_shoot=false
+		await(get_tree().create_timer(0.35).timeout)
+		can_shoot=true
 	
 	else:
 		var b = blue_shot.instantiate()

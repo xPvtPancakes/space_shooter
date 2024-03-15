@@ -36,6 +36,32 @@ point_count = 16
 [node name="Game" type="Node2D"]
 script = ExtResource("1_v63fr")
 
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="RailCharges2" type="Label" parent="Control"]
+top_level = true
+offset_left = 1119.0
+offset_top = -1.0
+offset_right = 1223.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("6_00de0")
+text = "From Code"
+
+[node name="RailCharges" type="Label" parent="Control"]
+top_level = true
+offset_left = 1095.0
+offset_right = 1135.0
+offset_bottom = 24.0
+theme_override_fonts/font = ExtResource("6_00de0")
+text = "F:"
+
 [node name="blue_ship" parent="." instance=ExtResource("2_g10mx")]
 position = Vector2(-748, 498)
 
@@ -98,21 +124,6 @@ text = "More Coming Soon!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RailCharges" type="Label" parent="."]
-offset_left = 1095.0
-offset_right = 1135.0
-offset_bottom = 24.0
-theme_override_fonts/font = ExtResource("6_00de0")
-text = "F:"
-
-[node name="RailCharges2" type="Label" parent="."]
-offset_left = 1119.0
-offset_top = -1.0
-offset_right = 1159.0
-offset_bottom = 23.0
-theme_override_fonts/font = ExtResource("6_00de0")
-text = "From Code"
-
 [node name="EndGame" type="Button" parent="."]
 visible = false
 offset_left = 476.0
@@ -154,6 +165,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LivesSprite" type="Sprite2D" parent="."]
+top_level = true
 position = Vector2(23, 40)
 scale = Vector2(0.400901, 0.364865)
 texture = ExtResource("6_uittp")
@@ -161,6 +173,7 @@ region_enabled = true
 region_rect = Rect2(112, 792, 111, 74)
 
 [node name="Lives_label" type="Label" parent="."]
+top_level = true
 offset_left = 50.0
 offset_top = 27.0
 offset_right = 136.0
@@ -205,6 +218,7 @@ curve = SubResource("Curve2D_myq0v")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="SpawnPath"]
 position = Vector2(497, -340)
+rotation = 1.5899
 loop = false
 
 [node name="SpawnPath2" type="Path2D" parent="."]
