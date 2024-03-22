@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dwfhd5do06amr"]
+[gd_scene load_steps=13 format=3 uid="uid://dwfhd5do06amr"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_v63fr"]
 [ext_resource type="PackedScene" uid="uid://cjbekul01iach" path="res://Scenes/blue_ship.tscn" id="2_g10mx"]
@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://dx54b7ql4q8lc" path="res://Kenney Blocks.ttf" id="6_00de0"]
 [ext_resource type="AudioStream" uid="uid://bddvxysad18ad" path="res://Music and sounds/Main Theme - Star Fox 64 [64] - Super Smash Bros. Ultimate.mp3" id="6_ohcbt"]
 [ext_resource type="Texture2D" uid="uid://cnep1umono3ew" path="res://Spritesheet/sheet.png" id="6_uittp"]
+[ext_resource type="PackedScene" uid="uid://dmsu80mcgmi87" path="res://Scenes/Shield.tscn" id="7_n8nj2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kea5m"]
 
@@ -47,6 +48,7 @@ grow_horizontal = 0
 
 [node name="RailCharges2" type="Label" parent="Control"]
 top_level = true
+layout_mode = 0
 offset_left = 1119.0
 offset_top = -1.0
 offset_right = 1223.0
@@ -56,6 +58,7 @@ text = "From Code"
 
 [node name="RailCharges" type="Label" parent="Control"]
 top_level = true
+layout_mode = 0
 offset_left = 1095.0
 offset_right = 1135.0
 offset_bottom = 24.0
@@ -63,7 +66,10 @@ theme_override_fonts/font = ExtResource("6_00de0")
 text = "F:"
 
 [node name="blue_ship" parent="." instance=ExtResource("2_g10mx")]
-position = Vector2(-748, 498)
+position = Vector2(-511, 379)
+
+[node name="Shield" parent="blue_ship" instance=ExtResource("7_n8nj2")]
+position = Vector2(106, 141)
 
 [node name="Score" type="Label" parent="."]
 top_level = true

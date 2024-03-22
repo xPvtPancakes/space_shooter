@@ -24,10 +24,12 @@ func get_input():
 		railgun()
 	
 
-	
-	if Input.is_action_just_pressed("Space"):
+	if Input.is_action_pressed("Space"):
 		if can_shoot == true:
 			shooting()
+	#if Input.is_action_just_pressed("Space"):
+		#if can_shoot == true:
+			#shooting()
 
 func railgun():
 	if get_tree().get_nodes_in_group("railgun").is_empty():
@@ -65,7 +67,9 @@ func shooting():
 		var b = blue_shot.instantiate()
 		owner.add_child(b)
 		b.transform = $Guns.global_transform
-	
+		can_shoot=false
+		await(get_tree().create_timer(0.2).timeout)
+		can_shoot=true
 
 func _physics_process(_delta):
 	get_input()

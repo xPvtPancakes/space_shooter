@@ -6,7 +6,7 @@ var tri_shot = preload("res://Scenes/triple_shot_powerup.tscn")
 var first_boss = preload("res://Scenes/1stBoss.tscn")
 var second_boss = preload("res://Scenes/2ndBoss.tscn")
 var comet = preload("res://Scenes/comet.tscn")
-var high_score
+var high_score: int
 var SaveFile = ("user://scoresave.tres")
 var score = 0
 var score_for_life = 0
@@ -109,7 +109,7 @@ func New_game():
 func Game_over():
 	$EnemyTimer.stop()
 	$GameOver.set_deferred("visible", true)
-	if score > high_score:
+	if score >= high_score:
 		save(score)
 	$RestartButton.set_deferred("visible", true)
 	$RestartButton.set_deferred("disabled", false)
@@ -120,7 +120,7 @@ func Game_over():
 
 func _on_start_timer_timeout(): #start game
 	$EnemyTimer.wait_time = randf_range(rand_range_x,rand_range_y)
-	#$EnemyTimer.start()
+	$EnemyTimer.start()
 	$CometTimer.start()
 	#expand_viewport()
 

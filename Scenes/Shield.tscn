@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://dmsu80mcgmi87"]
+
+[ext_resource type="Texture2D" uid="uid://cyqvl7pbntbbn" path="res://Spritesheet/sheilds.png" id="1_3hyuk"]
+[ext_resource type="Script" path="res://Scripts/Shield.gd" id="1_ox3cx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vcny"]
+atlas = ExtResource("1_3hyuk")
+region = Rect2(0, 257, 152, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_am1bu"]
+atlas = ExtResource("1_3hyuk")
+region = Rect2(0, 139, 152, 118)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_csqxc"]
+atlas = ExtResource("1_3hyuk")
+region = Rect2(0, 1, 152, 137)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_crdsm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"hp0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2vcny")
+}],
+"loop": true,
+"name": &"hp1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_am1bu")
+}],
+"loop": true,
+"name": &"hp2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_csqxc")
+}],
+"loop": true,
+"name": &"hp3",
+"speed": 5.0
+}]
+
+[node name="Area2D" type="Area2D" groups=["shield"]]
+script = ExtResource("1_ox3cx")
+
+[node name="3hpCollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-55, 39, -71, 16, -69, -9, -64, -27, -51, -45, -43, -56, -21, -65, 0, -68, 13, -67, 32, -62, 49, -52, 62, -38, 71, -22, 74, -4, 73, 14, 68, 29, 61, 46)
+
+[node name="2hpCollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-57, 54, -71, 16, -69, -9, -61, -27, -48, -40, -34, -51, -17, -57, 0, -61, 14, -59, 31, -56, 49, -43, 59, -34, 71, -22, 74, -4, 73, 14, 69, 35, 62, 53)
+
+[node name="3hpCollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-64, 47, -69, 15, -66, -8, -57, -26, -44, -38, -34, -45, -15, -51, 1, -52, 19, -49, 33, -43, 48, -29, 58, -17, 63, 1, 63, 15, 63, 26, 59, 40, 57, 50)
+
+[node name="Shield" type="AnimatedSprite2D" parent="." groups=["shield"]]
+sprite_frames = SubResource("SpriteFrames_crdsm")
+animation = &"hp1"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
