@@ -8,7 +8,7 @@ signal first_boss()
 signal second_boss()
 signal rail_charges(change)
 signal ship_color
-var shield = 0
+signal shield(value)
 var railcharge = 0
 var health = 3
 

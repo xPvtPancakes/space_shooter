@@ -7,13 +7,13 @@
 atlas = ExtResource("1_3hyuk")
 region = Rect2(0, 257, 152, 104)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_am1bu"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3y5a"]
 atlas = ExtResource("1_3hyuk")
-region = Rect2(0, 139, 152, 118)
+region = Rect2(7, 138, 144, 120)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_csqxc"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qq0sj"]
 atlas = ExtResource("1_3hyuk")
-region = Rect2(0, 1, 152, 137)
+region = Rect2(7, 0, 144, 137)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_crdsm"]
 animations = [{
@@ -35,7 +35,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_am1bu")
+"texture": SubResource("AtlasTexture_h3y5a")
 }],
 "loop": true,
 "name": &"hp2",
@@ -43,24 +43,30 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_csqxc")
+"texture": SubResource("AtlasTexture_qq0sj")
 }],
 "loop": true,
 "name": &"hp3",
 "speed": 5.0
 }]
 
-[node name="Area2D" type="Area2D" groups=["shield"]]
+[node name="shield" type="Area2D" groups=["shield"]]
 script = ExtResource("1_ox3cx")
 
-[node name="3hpCollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-55, 39, -71, 16, -69, -9, -64, -27, -51, -45, -43, -56, -21, -65, 0, -68, 13, -67, 32, -62, 49, -52, 62, -38, 71, -22, 74, -4, 73, 14, 68, 29, 61, 46)
+[node name="CollisionPolygon3hp" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-58, 43, -71, 16, -69, -9, -64, -27, -51, -45, -42, -55, -21, -65, 0, -68, 13, -67, 32, -62, 50, -50, 61, -36, 70, -22, 74, -4, 73, 14, 68, 29, 61, 43)
+disabled = true
 
-[node name="2hpCollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-57, 54, -71, 16, -69, -9, -61, -27, -48, -40, -34, -51, -17, -57, 0, -61, 14, -59, 31, -56, 49, -43, 59, -34, 71, -22, 74, -4, 73, 14, 69, 35, 62, 53)
+[node name="CollisionPolygon2hp" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-57, 54, -70, 26, -69, -9, -61, -27, -48, -40, -34, -51, -17, -57, 0, -61, 14, -59, 34, -51, 49, -41, 59, -30, 67, -16, 71, -1, 73, 14, 69, 35, 62, 53)
+disabled = true
 
-[node name="3hpCollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+[node name="CollisionPolygon1hp" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(-64, 47, -69, 15, -66, -8, -57, -26, -44, -38, -34, -45, -15, -51, 1, -52, 19, -49, 33, -43, 48, -29, 58, -17, 63, 1, 63, 15, 63, 26, 59, 40, 57, 50)
+disabled = true
 
 [node name="Shield" type="AnimatedSprite2D" parent="." groups=["shield"]]
 sprite_frames = SubResource("SpriteFrames_crdsm")

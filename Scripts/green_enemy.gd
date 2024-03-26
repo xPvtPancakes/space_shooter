@@ -102,7 +102,7 @@ func _on_area_2d_area_entered(area):
 	if area.is_in_group("railgun"):
 		PlayerVariables.emit_signal("score_up", score)
 		dead()
-	if area.is_in_group("comet"):
+	if area.is_in_group("comet") or area.is_in_group("shield"):
 		dead()
 
 

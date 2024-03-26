@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://crcr8tro2neaw"]
+
+[ext_resource type="Script" path="res://Scripts/Shield_powerup.gd" id="1_nl3vn"]
+[ext_resource type="Texture2D" uid="uid://l5bamvpwgg6n" path="res://Spritesheet/shield_powerup.png" id="2_o31da"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_khjk2"]
+radius = 21.095
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_nl3vn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_khjk2")
+
+[node name="ShieldPowerup" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_o31da")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

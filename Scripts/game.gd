@@ -3,6 +3,7 @@ extends Node2D
 #var player_health = 3
 var enemy = preload("res://Scenes/green_enemy.tscn")
 var tri_shot = preload("res://Scenes/triple_shot_powerup.tscn")
+var shield_pu = preload("res://Scenes/Shield_powerup.tscn")
 var first_boss = preload("res://Scenes/1stBoss.tscn")
 var second_boss = preload("res://Scenes/2ndBoss.tscn")
 var comet = preload("res://Scenes/comet.tscn")
@@ -61,16 +62,28 @@ func _on_score_up(adj_score):
 
 	if kill_counter == 10:
 		var x_rand_num =rng.randf_range(50, 1000)
-		var tri_shot_spawn = Vector2(0, 0)
-		var p = tri_shot.instantiate()
-		tri_shot_spawn.x = x_rand_num
-		p.position = tri_shot_spawn
-		add_child.call_deferred(p)
-		kill_counter=0
-		kill_count_reset += 1
+		var coin_flip = rng.randf_range(0, 1)
+		if coin_flip <= 0.5:
+			
+			var tri_shot_spawn = Vector2(0, 0)
+			var p = tri_shot.instantiate()
+			tri_shot_spawn.x = x_rand_num
+			p.position = tri_shot_spawn
+			add_child.call_deferred(p)
+			kill_counter=0
+			kill_count_reset += 1
+			
+		if coin_flip > 0.5:
+			var pu_spawn = Vector2(0, 0)
+			var p = shield_pu.instantiate()
+			pu_spawn.x = x_rand_num
+			p.position = pu_spawn
+			add_child.call_deferred(p)
+			kill_counter=0
+			kill_count_reset += 1
 
 	kills_without_death += 1
-	if kills_without_death >= 20:
+	if kills_without_death >= 40:
 		kills_without_death = 0
 		PlayerVariables.emit_signal("rail_charges", 1)
 	
@@ -199,7 +212,7 @@ func _on_enemy_timer_timeout(): #spawn enemies
 	
 func spawn_enemy():
 	var rand_num = rng.randf_range(-10, 10)
-	var enemy_type = (kill_count_reset * (boss_flag_1+boss_flag_2) / rng.randf_range(2, 10))
+	var enemy_type = boss_flag_1 + boss_flag_2
 	var y_rand_num = rng.randf_range(20, 300)
 	var enemy_spawn_location = Vector2(0, 0)
 	var e = enemy.instantiate()

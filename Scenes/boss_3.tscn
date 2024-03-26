@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://doefmciro5nlb"]
+
+[ext_resource type="Texture2D" uid="uid://cg1511f0tw3co" path="res://Spritesheet/boss3top.png" id="1_m6m6v"]
+[ext_resource type="Texture2D" uid="uid://destjihmdnmfo" path="res://Spritesheet/boss3bottom.png" id="2_6p2xq"]
+
+[node name="Boss3" type="Area2D" groups=["boss"]]
+
+[node name="Top_sprite" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("1_m6m6v")
+
+[node name="Bottom_sprite" type="Sprite2D" parent="."]
+position = Vector2(-108, 1)
+rotation = 1.5708
+texture = ExtResource("2_6p2xq")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]

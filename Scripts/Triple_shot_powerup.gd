@@ -16,6 +16,7 @@ func _physics_process(delta):
 
 func powerup():
 	PlayerVariables.emit_signal("triple_shot", true)
+	PlayerVariables.emit_signal("score_up", 50)
 	queue_free()
 
 
