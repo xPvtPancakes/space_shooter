@@ -87,14 +87,4 @@ func swing():
 		await(get_tree().create_timer(0.03).timeout)
 		
 		
-#var can_shoot
-#var enemy_rail = load("res://Scenes/Enemy_Railgun.tscn")
-#func railgun():			#use this for 3rd boss
-	#if get_tree().get_nodes_in_group("enemy_rail").is_empty():
-		#var b = enemy_rail.instantiate()
-		#add_child(b)
-		#b.transform = $Rail.transform
-		#can_shoot = false
-		#await(get_tree().create_timer(3).timeout)
-		#remove_child(b)
-		#can_shoot = true
+

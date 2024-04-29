@@ -1,17 +1,54 @@
-[gd_scene load_steps=3 format=3 uid="uid://doefmciro5nlb"]
+[gd_scene load_steps=5 format=3 uid="uid://doefmciro5nlb"]
 
+[ext_resource type="Script" path="res://Scripts/boss_3.gd" id="1_7ebp3"]
 [ext_resource type="Texture2D" uid="uid://cg1511f0tw3co" path="res://Spritesheet/boss3top.png" id="1_m6m6v"]
 [ext_resource type="Texture2D" uid="uid://destjihmdnmfo" path="res://Spritesheet/boss3bottom.png" id="2_6p2xq"]
+[ext_resource type="AudioStream" uid="uid://t7d17iok17b6" path="res://Music and sounds/reload.mp3" id="4_r0nnp"]
 
 [node name="Boss3" type="Area2D" groups=["boss"]]
-
-[node name="Top_sprite" type="Sprite2D" parent="."]
-rotation = 1.5708
-texture = ExtResource("1_m6m6v")
+script = ExtResource("1_7ebp3")
 
 [node name="Bottom_sprite" type="Sprite2D" parent="."]
-position = Vector2(-108, 1)
+visibility_layer = 8
+position = Vector2(-216, 0)
 rotation = 1.5708
+scale = Vector2(2, 2)
 texture = ExtResource("2_6p2xq")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="Top_sprite" type="Sprite2D" parent="."]
+visibility_layer = 4
+rotation = 1.5708
+scale = Vector2(2, 2)
+texture = ExtResource("1_m6m6v")
+
+[node name="CollisionPolygonTop" type="CollisionPolygon2D" parent="."]
+top_level = true
+visibility_layer = 2
+polygon = PackedVector2Array(-73, 175, -54, 183, -35, 186, -18, 191, -10, 205, 2, 207, 23, 180, 152, 175, 163, 159, 197, 155, 199, 161, 215, 161, 250, 143, 248, 126, 271, 94, 274, 30, 267, -55, 256, -119, 226, -151, 181, -181, 147, -206, 17, -186, -11, -211, -98, -180, -121, -153, -158, -149, -157, 154, -83, 162)
+
+[node name="CollisionPolygonBottom" type="CollisionPolygon2D" parent="."]
+position = Vector2(-580, -32)
+polygon = PackedVector2Array(316, 113, 421, 179, 422, -118, 374, -88, 358, -68, 318, -10, 306, 35, 307, 82)
+
+[node name="Rail" type="Marker2D" parent="."]
+position = Vector2(163, -28)
+
+[node name="Rail2" type="Marker2D" parent="."]
+position = Vector2(160, 109)
+
+[node name="Nose1" type="Marker2D" parent="."]
+position = Vector2(39, 100)
+rotation = 0.261799
+
+[node name="Nose4" type="Marker2D" parent="."]
+position = Vector2(39, 100)
+
+[node name="Nose2" type="Marker2D" parent="."]
+position = Vector2(82, 103)
+rotation = -0.261799
+
+[node name="Nose3" type="Marker2D" parent="."]
+position = Vector2(82, 103)
+
+[node name="ReloadSE" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_r0nnp")

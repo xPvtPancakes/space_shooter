@@ -91,3 +91,5 @@ shape = SubResource("CircleShape2D_0oxan")
 
 [node name="Rail_se" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_ngfhn")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

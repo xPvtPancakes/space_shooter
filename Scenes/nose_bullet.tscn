@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://didl3252hnhcw"]
+
+[ext_resource type="Script" path="res://Scripts/Nose_bullet.gd" id="1_kqstj"]
+[ext_resource type="Texture2D" uid="uid://dnjn0x3kv3bwh" path="res://Spritesheet/nose_hair.png" id="2_y5p4l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60j3m"]
+atlas = ExtResource("2_y5p4l")
+region = Rect2(0, 0, 8, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7cw7"]
+atlas = ExtResource("2_y5p4l")
+region = Rect2(0, 34, 8, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rty0q"]
+atlas = ExtResource("2_y5p4l")
+region = Rect2(0, 68, 8, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yseau"]
+atlas = ExtResource("2_y5p4l")
+region = Rect2(0, 102, 8, 34)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mi44g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60j3m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m7cw7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rty0q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yseau")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6o7mt"]
+size = Vector2(8, 34)
+
+[node name="Nose_bullet" type="Area2D" groups=["Enemy_fire"]]
+script = ExtResource("1_kqstj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_mi44g")
+frame = 1
+frame_progress = 0.174146
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6o7mt")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

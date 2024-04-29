@@ -133,7 +133,7 @@ func Game_over():
 
 func _on_start_timer_timeout(): #start game
 	$EnemyTimer.wait_time = randf_range(rand_range_x,rand_range_y)
-	$EnemyTimer.start()
+	#$EnemyTimer.start()
 	$CometTimer.start()
 	#expand_viewport()
 
