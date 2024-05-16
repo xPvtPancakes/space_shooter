@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dwfhd5do06amr"]
+[gd_scene load_steps=13 format=3 uid="uid://dwfhd5do06amr"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_v63fr"]
 [ext_resource type="PackedScene" uid="uid://cjbekul01iach" path="res://Scenes/blue_ship.tscn" id="2_g10mx"]
@@ -7,7 +7,6 @@
 [ext_resource type="AudioStream" uid="uid://bddvxysad18ad" path="res://Music and sounds/Main Theme - Star Fox 64 [64] - Super Smash Bros. Ultimate.mp3" id="6_ohcbt"]
 [ext_resource type="Texture2D" uid="uid://cnep1umono3ew" path="res://Spritesheet/sheet.png" id="6_uittp"]
 [ext_resource type="PackedScene" uid="uid://dmsu80mcgmi87" path="res://Scenes/Shield.tscn" id="7_n8nj2"]
-[ext_resource type="PackedScene" uid="uid://doefmciro5nlb" path="res://Scenes/boss_3.tscn" id="8_gaq1u"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kea5m"]
 
@@ -25,7 +24,7 @@ point_count = 3
 
 [sub_resource type="Curve2D" id="Curve2D_drwb8"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 497, -340, 0, 0, 0, 0, 494, -183, 0, 0, 0, 0, 494, 70)
+"points": PackedVector2Array(0, 0, 0, 0, 497, -340, 0, 0, 0, 0, 494, -183, 0, 0, 0, 0, 499, 135)
 }
 point_count = 3
 
@@ -247,9 +246,6 @@ curve = SubResource("Curve2D_hn2cc")
 position = Vector2(382, -28)
 rotation = 1.46014
 loop = false
-
-[node name="Boss3" parent="." instance=ExtResource("8_gaq1u")]
-position = Vector2(548, 114)
 
 [connection signal="pressed" from="EndGame" to="." method="_on_end_game_pressed"]
 [connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]

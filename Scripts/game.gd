@@ -6,6 +6,8 @@ var tri_shot = preload("res://Scenes/triple_shot_powerup.tscn")
 var shield_pu = preload("res://Scenes/Shield_powerup.tscn")
 var first_boss = preload("res://Scenes/1stBoss.tscn")
 var second_boss = preload("res://Scenes/2ndBoss.tscn")
+var third_boss = preload("res://Scenes/boss_3.tscn")
+var third_boss_chin = preload("res://Scenes/boss_chin.tscn")
 var comet = preload("res://Scenes/comet.tscn")
 var high_score: int
 var SaveFile = ("user://scoresave.tres")
@@ -20,6 +22,7 @@ var rand_range_x = 0.2
 var rand_range_y = 3
 var boss_flag_1 = 0
 var boss_flag_2 = 0
+var boss_flag_3 = 0
 @onready var LoopPath = $EnemyPath/EnemyPath2D
 @onready var path = $BossFight/PathFollow2D
 @onready var boss_spawn = $SpawnPath/PathFollow2D
@@ -32,6 +35,7 @@ func _ready():
 	PlayerVariables.connect("player_health", _on_health_change)
 	PlayerVariables.connect("first_boss", _on_first_boss_defeat)
 	PlayerVariables.connect("second_boss", _on_second_boss_defeat)
+	PlayerVariables.connect("third_boss", _on_third_boss_defeat)
 	#PlayerVariables.connect("rail_charges", _on_Rail_shot)
 	$Control/RailCharges2.text = str(PlayerVariables.railcharge)
 	$Lives_label.text = ": " + str(PlayerVariables.health)
@@ -136,6 +140,7 @@ func _on_start_timer_timeout(): #start game
 	#$EnemyTimer.start()
 	$CometTimer.start()
 	#expand_viewport()
+	spawn_boss3()
 
 	
 
@@ -161,6 +166,17 @@ func Spawn_boss2():
 	boss_instance.rotation = -PI/2
 	boss_spawn2.progress_ratio = 0
 	boss_spawn2.call_deferred("add_child", boss_instance)
+	
+func spawn_boss3():
+	var boss_instance = third_boss.instantiate()
+	var boss_chin = third_boss_chin.instantiate()
+	boss_spawn.progress_ratio = 0
+	boss_chin.rotation = -PI/2
+	boss_chin.position.y += 76
+	boss_instance.rotation = -PI/2
+	boss_instance.position.y -= 200
+	boss_spawn.call_deferred("add_child", boss_chin)
+	boss_spawn.call_deferred("add_child", boss_instance)
 
 func spawn_comet():
 	var comet_instance = comet.instantiate()
@@ -247,6 +263,10 @@ func _on_first_boss_defeat():
 
 func _on_second_boss_defeat():
 	$EnemyTimer.paused = false
+
+func _on_third_boss_defeat():
+	$EndGame.set_deferred("visible", true)
+	$EndGame.set_deferred("disabled", false)
 
 func _on_line_edit_text_submitted(name_entered):
 	#Update_Highscores(name_entered)

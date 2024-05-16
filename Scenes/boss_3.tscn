@@ -1,54 +1,81 @@
-[gd_scene load_steps=5 format=3 uid="uid://doefmciro5nlb"]
+[gd_scene load_steps=10 format=3 uid="uid://doefmciro5nlb"]
 
 [ext_resource type="Script" path="res://Scripts/boss_3.gd" id="1_7ebp3"]
 [ext_resource type="Texture2D" uid="uid://cg1511f0tw3co" path="res://Spritesheet/boss3top.png" id="1_m6m6v"]
-[ext_resource type="Texture2D" uid="uid://destjihmdnmfo" path="res://Spritesheet/boss3bottom.png" id="2_6p2xq"]
-[ext_resource type="AudioStream" uid="uid://t7d17iok17b6" path="res://Music and sounds/reload.mp3" id="4_r0nnp"]
+[ext_resource type="Texture2D" uid="uid://d5gh54u6vmhl" path="res://Spritesheet/Explosion/explosion00.png" id="3_dlwew"]
+[ext_resource type="Texture2D" uid="uid://cjcf2t0ik0oan" path="res://Spritesheet/Explosion/explosion01.png" id="4_0e5va"]
+[ext_resource type="Texture2D" uid="uid://88803ppkgn3o" path="res://Spritesheet/Explosion/explosion02.png" id="5_yjcaa"]
+[ext_resource type="Texture2D" uid="uid://dsyn1o6j85u5i" path="res://Spritesheet/Explosion/explosion03.png" id="6_pnanp"]
+[ext_resource type="Texture2D" uid="uid://dmdxbgmqyyulg" path="res://Spritesheet/Explosion/explosion04.png" id="7_8s8ns"]
+[ext_resource type="AudioStream" uid="uid://xe8oiweqgywc" path="res://Music and sounds/explosion.mp3" id="8_f1e4a"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lpy7q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_m6m6v")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_dlwew")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0e5va")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_yjcaa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_pnanp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_8s8ns")
+}],
+"loop": false,
+"name": &"explosion",
+"speed": 5.0
+}]
 
 [node name="Boss3" type="Area2D" groups=["boss"]]
 script = ExtResource("1_7ebp3")
 
-[node name="Bottom_sprite" type="Sprite2D" parent="."]
-visibility_layer = 8
-position = Vector2(-216, 0)
-rotation = 1.5708
-scale = Vector2(2, 2)
-texture = ExtResource("2_6p2xq")
-
-[node name="Top_sprite" type="Sprite2D" parent="."]
-visibility_layer = 4
-rotation = 1.5708
-scale = Vector2(2, 2)
-texture = ExtResource("1_m6m6v")
-
 [node name="CollisionPolygonTop" type="CollisionPolygon2D" parent="."]
+visible = false
 top_level = true
 visibility_layer = 2
-polygon = PackedVector2Array(-73, 175, -54, 183, -35, 186, -18, 191, -10, 205, 2, 207, 23, 180, 152, 175, 163, 159, 197, 155, 199, 161, 215, 161, 250, 143, 248, 126, 271, 94, 274, 30, 267, -55, 256, -119, 226, -151, 181, -181, 147, -206, 17, -186, -11, -211, -98, -180, -121, -153, -158, -149, -157, 154, -83, 162)
+polygon = PackedVector2Array(-142, 161, -220, 150, -219, -144, -177, -147, -147, -185, -95, -205, -59, -202, -43, -192, -42, -183, 68, -198, 107, -192, 166, -145, 198, -95, 207, -42, 218, -26, 212, 4, 212, 99, 184, 124, 181, 141, 183, 151, 139, 167, 133, 158, 100, 163, 81, 177, 62, 180, -37, 180, -52, 204, -70, 205, -75, 197, -129, 177)
 
-[node name="CollisionPolygonBottom" type="CollisionPolygon2D" parent="."]
-position = Vector2(-580, -32)
-polygon = PackedVector2Array(316, 113, 421, 179, 422, -118, 374, -88, 358, -68, 318, -10, 306, 35, 307, 82)
+[node name="Top_sprite" type="AnimatedSprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_lpy7q")
 
 [node name="Rail" type="Marker2D" parent="."]
-position = Vector2(163, -28)
+position = Vector2(101, -24)
 
 [node name="Rail2" type="Marker2D" parent="."]
-position = Vector2(160, 109)
+position = Vector2(100, 113)
 
 [node name="Nose1" type="Marker2D" parent="."]
-position = Vector2(39, 100)
+position = Vector2(35, 161)
 rotation = 0.261799
 
 [node name="Nose4" type="Marker2D" parent="."]
-position = Vector2(39, 100)
+position = Vector2(35, 159)
 
 [node name="Nose2" type="Marker2D" parent="."]
-position = Vector2(82, 103)
+position = Vector2(86, 164)
 rotation = -0.261799
 
 [node name="Nose3" type="Marker2D" parent="."]
-position = Vector2(82, 103)
+position = Vector2(85, 159)
 
-[node name="ReloadSE" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_r0nnp")
+[node name="Explosion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_f1e4a")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="animation_finished" from="Top_sprite" to="." method="_on_top_sprite_animation_finished"]

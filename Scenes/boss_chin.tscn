@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://bpbqtfwmsfm5j"]
+
+[ext_resource type="Script" path="res://Scenes/boss_chin.gd" id="1_6hxrq"]
+[ext_resource type="Texture2D" uid="uid://destjihmdnmfo" path="res://Spritesheet/boss3bottom.png" id="1_auy2d"]
+[ext_resource type="AudioStream" uid="uid://t7d17iok17b6" path="res://Music and sounds/reload.mp3" id="3_15pla"]
+[ext_resource type="Texture2D" uid="uid://dmdxbgmqyyulg" path="res://Spritesheet/Explosion/explosion04.png" id="4_ebjb1"]
+[ext_resource type="Texture2D" uid="uid://b3nmtgqduuylf" path="res://Spritesheet/Explosion/explosion05.png" id="5_h0b1l"]
+[ext_resource type="Texture2D" uid="uid://hnehlm3y3ewm" path="res://Spritesheet/Explosion/explosion06.png" id="6_jl3dj"]
+[ext_resource type="Texture2D" uid="uid://cfxb4o8b3bbnu" path="res://Spritesheet/Explosion/explosion07.png" id="7_lwvau"]
+[ext_resource type="AudioStream" uid="uid://xe8oiweqgywc" path="res://Music and sounds/explosion.mp3" id="8_iayto"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l21vb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_auy2d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ebjb1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_h0b1l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_jl3dj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_lwvau")
+}],
+"loop": false,
+"name": &"explosion",
+"speed": 5.0
+}]
+
+[node name="BossChin" type="Area2D" groups=["boss"]]
+script = ExtResource("1_6hxrq")
+
+[node name="CollisionPolygonBottom" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(58, -148, 59, 147, 13, 117, -28, 95, -51, 70, -62, 39, -56, 0, -43, -38, -23, -77, 3, -113, 31, -134, 41, -148)
+
+[node name="ReloadSE" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_15pla")
+
+[node name="Bottom_sprite" type="AnimatedSprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_l21vb")
+
+[node name="Explosion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_iayto")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="animation_finished" from="Bottom_sprite" to="." method="_on_bottom_sprite_animation_finished"]
