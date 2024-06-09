@@ -106,7 +106,10 @@ func _on_score_up(adj_score):
 		Spawn_boss2()
 		$EnemyTimer.paused = true
 		
-	
+	if score > 50000 && boss_flag_1 == 1 && boss_flag_2 == 1:
+		boss_flag_3 = 1
+		spawn_boss3()
+		$EnemyTimer.paused = true
 
 
 
